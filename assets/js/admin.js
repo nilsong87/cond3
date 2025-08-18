@@ -1,38 +1,28 @@
 $(document).ready(function() {
-    // Verifica se FullCalendar está disponível
-    if (typeof FullCalendar === 'undefined') {
-        console.error('FullCalendar não está carregado corretamente');
-        return;
-    }
-
     // Constantes para elementos do DOM
-    const $sidebarToggle = $('#sidebarToggle');
+    const $sidebarToggle = $('.sidebar-toggle, #sidebarToggle');
     const $appSidebar = $('.app-sidebar');
-    const $sidebarOverlay = $('<div class="sidebar-overlay"></div>').appendTo('body');
+    const $sidebarOverlay = $('.sidebar-overlay').length ? $('.sidebar-overlay') : $('<div class="sidebar-overlay"></div>').appendTo('body');
     const $body = $('body');
     const $window = $(window);
+    const $sidebarLinks = $('.sidebar-menu a[href^="#"]');
 
     // ==============================================
     // FUNÇÕES AUXILIARES
     // ==============================================
 
-    /**
-     * Alterna a visibilidade da sidebar
-     */
     function toggleSidebar() {
         $appSidebar.toggleClass('active');
         $sidebarOverlay.toggleClass('active');
         $body.toggleClass('no-scroll');
     }
 
-    /**
-     * Fecha a sidebar
-     */
     function closeSidebar() {
         $appSidebar.removeClass('active');
         $sidebarOverlay.removeClass('active');
         $body.removeClass('no-scroll');
     }
+
 
     /**
      * Alterna a visibilidade da senha
@@ -53,22 +43,39 @@ $(document).ready(function() {
 
     /**
      * Muda a seção de conteúdo exibida
-     * @param {jQuery} $link - Link do menu clicado
+     * @param {string} target - ID da seção alvo (sem o #)
      */
-    function switchContentSection($link) {
-        const target = $link.attr('href').substring(1);
+    function switchContentSection(target) {
+        console.log(`Tentando mostrar seção: ${target}`);
         
+        // Remove a classe active de todos os itens do menu
         $('.sidebar-menu li').removeClass('active');
-        $link.parent().addClass('active');
         
+        // Adiciona a classe active apenas ao item clicado
+        const $menuItem = $(`.sidebar-menu a[href="#${target}"]`).parent();
+        $menuItem.addClass('active');
+        
+        // Esconde todas as seções de conteúdo
         $('.content-section').removeClass('active');
-        $(`#${target}-section`).addClass('active');
         
-        $('.header-title').text($link.text().trim());
+        // Mostra apenas a seção correspondente
+        const $targetSection = $(`.content-section[id$="-section"][id^="${target}"]`);
         
-        // Fecha sidebar em dispositivos móveis
-        if ($window.width() < 992) {
-            closeSidebar();
+        if ($targetSection.length) {
+            $targetSection.addClass('active');
+            
+            // Atualiza o título do cabeçalho
+            const sectionTitle = $menuItem.find('a').text().trim();
+            $('.header-title').text(sectionTitle);
+            
+            // Atualiza a URL com o hash
+            history.pushState(null, null, `#${target}`);
+            
+            console.log(`Seção ${target} mostrada com sucesso`);
+        } else {
+            console.error(`Seção para "${target}" não encontrada`);
+            // Mostra a dashboard como fallback
+            switchContentSection('dashboard');
         }
     }
 
@@ -149,11 +156,12 @@ $(document).ready(function() {
     }
 
     // ==============================================
-    // INICIALIZAÇÃO DOS COMPONENTES
+    // EVENT LISTENERS
     // ==============================================
 
     // Menu Hamburguer
     $sidebarToggle.on('click', function(e) {
+        e.preventDefault();
         e.stopPropagation();
         toggleSidebar();
     });
@@ -161,16 +169,39 @@ $(document).ready(function() {
     // Fechar sidebar ao clicar no overlay
     $sidebarOverlay.on('click', closeSidebar);
     
-    // Alternar visibilidade da senha
-    $('.toggle-password').on('click', function() {
-        togglePasswordVisibility($(this));
-    });
-    
-    // Alternar entre seções de conteúdo
-    $('.sidebar-menu a').on('click', function(e) {
+    // Navegação do menu
+    $sidebarLinks.on('click', function(e) {
         e.preventDefault();
-        switchContentSection($(this));
+        const target = $(this).attr('href').substring(1);
+        console.log(`Clicou no menu: ${target}`);
+        
+        switchContentSection(target);
+        
+        // Fecha sidebar em dispositivos móveis
+        if ($window.width() < 992) {
+            closeSidebar();
+        }
     });
+
+     // Trata mudanças no hash da URL
+    $(window).on('hashchange', function() {
+        const target = window.location.hash.substring(1);
+        if (target) {
+            switchContentSection(target);
+        }
+    });
+
+     // ==============================================
+    // INICIALIZAÇÃO
+    // ==============================================
+
+    // Inicialização - Mostra a seção correta com base na URL
+    const initialTarget = window.location.hash.substring(1) || 'dashboard';
+    switchContentSection(initialTarget);
+
+    // ==============================================
+    // INICIALIZAÇÃO DOS COMPONENTES
+    // ==============================================
 
     // Inicializar calendários
     const residentEvents = [
@@ -229,14 +260,14 @@ $(document).ready(function() {
     $('#copyPixButton').on('click', function() {
         const pixCode = $(this).siblings('input').val();
         navigator.clipboard.writeText(pixCode).then(function() {
-            const $button = $('#copyPixButton');
+            const $button = $(this);
             const originalText = $button.html();
             
             $button.html('<i class="fas fa-check"></i> Copiado!');
             setTimeout(() => {
                 $button.html(originalText);
             }, 2000);
-        }).catch(err => {
+        }.bind(this)).catch(err => {
             console.error('Falha ao copiar texto: ', err);
             alert('Não foi possível copiar o código PIX');
         });
@@ -249,199 +280,14 @@ $(document).ready(function() {
         }
     });
 
-    $(document).ready(function() {
-    // Elementos do DOM
-    const $sidebarToggle = $('.sidebar-toggle');
-    const $appSidebar = $('.app-sidebar');
-    const $sidebarOverlay = $('<div class="sidebar-overlay"></div>').appendTo('body');
-    const $body = $('body');
-
-    // Função para abrir/fechar o menu
-    function toggleSidebar() {
-        $appSidebar.toggleClass('active');
-        $sidebarOverlay.toggleClass('active');
-        $body.toggleClass('no-scroll');
+    // Inicialização - Mostra a seção correta com base na URL
+    if (window.location.hash) {
+        const target = window.location.hash.substring(1);
+        switchContentSection(target);
+    } else {
+        switchContentSection('dashboard');
     }
 
-    // Função para fechar o menu
-    function closeSidebar() {
-        $appSidebar.removeClass('active');
-        $sidebarOverlay.removeClass('active');
-        $body.removeClass('no-scroll');
-    }
-
-    // Evento de clique no botão hamburguer
-    $sidebarToggle.on('click', function(e) {
-        e.stopPropagation();
-        toggleSidebar();
-    });
-
-    // Fechar ao clicar no overlay
-    $sidebarOverlay.on('click', closeSidebar);
-
-    // Fechar ao clicar em um link do menu (para mobile)
-    $('.sidebar-menu a').on('click', function() {
-        if ($(window).width() < 992) {
-            closeSidebar();
-        }
-    });
-
-    // Fechar ao redimensionar para telas maiores
-    $(window).on('resize', function() {
-        if ($(window).width() >= 992) {
-            closeSidebar();
-        }
-    });
-
-});
-});
-
-    // ==============================================
-    // FUNCIONALIDADES DO SISTEMA
-    // ==============================================
-
-    // Alternar visibilidade da senha
-    $('.toggle-password').on('click', function() {
-        const $input = $(this).siblings('input');
-        const $icon = $(this).find('i');
-        $input.attr('type', $input.attr('type') === 'password' ? 'text' : 'password');
-        $icon.toggleClass('fa-eye fa-eye-slash');
-    });
-
-    // Alternar entre seções de conteúdo APENAS para links que começam com #
-    $('.sidebar-menu a[href^="#"]').on('click', function(e) {
-        e.preventDefault();
-        const target = $(this).attr('href').substring(1);
-        
-        $('.sidebar-menu li').removeClass('active');
-        $(this).parent().addClass('active');
-        
-        $('.content-section').removeClass('active');
-        $(`#${target}-section`).addClass('active');
-        
-        $('.header-title').text($(this).text().trim());
-    });
-
-    // Para links que não começam com #, permitir o comportamento padrão
-    $('.sidebar-menu a').not('[href^="#"]').on('click', function() {
-        // Apenas fecha a sidebar em mobile
-        if ($window.width() < 992) {
-            closeSidebar();
-        }
-        // O navegador seguirá o link normalmente
-    });
-
-    // Restante do seu código permanece o mesmo...
-    // Inicializar calendários
-    function initCalendar(elementId, events) {
-        const calendarEl = document.getElementById(elementId);
-        if (!calendarEl || typeof FullCalendar === 'undefined') return null;
-
-        try {
-            const calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                headerToolbar: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
-                },
-                events: events,
-                locale: 'pt-br',
-                eventClick: function(info) {
-                    const start = info.event.start ? info.event.start.toLocaleString('pt-BR') : 'Não definido';
-                    const end = info.event.end ? info.event.end.toLocaleString('pt-BR') : 'Não definido';
-                    
-                    $('#eventModal .modal-title').text(info.event.title);
-                    $('#eventModal .modal-body').html(`
-                        <p><strong>Início:</strong> ${start}</p>
-                        <p><strong>Término:</strong> ${end}</p>
-                    `);
-                    $('#eventModal').modal('show');
-                }
-            });
-            calendar.render();
-            return calendar;
-        } catch (error) {
-            console.error('Erro ao inicializar calendário:', error);
-            return null;
-        }
-    }
-
-    // Calendário do morador
-    initCalendar('resident-calendar', [
-        {
-            title: 'Reserva - Churrasqueira',
-            start: new Date(),
-            end: new Date(new Date().setHours(new Date().getHours() + 3)),
-            backgroundColor: '#4cc9f0',
-            borderColor: '#4cc9f0'
-        },
-        {
-            title: 'Reserva - Salão de Festas',
-            start: new Date(new Date().setDate(new Date().getDate() + 7)),
-            end: new Date(new Date().setDate(new Date().getDate() + 7) + 4 * 60 * 60 * 1000),
-            backgroundColor: '#4895ef',
-            borderColor: '#4895ef'
-        }
-    ]);
-
-    // Calendário de reservas
-    initCalendar('reservation-calendar', [
-        {
-            title: 'Churrasqueira - Apto 102',
-            start: new Date(),
-            end: new Date(new Date().setHours(new Date().getHours() + 3)),
-            backgroundColor: '#4cc9f0',
-            borderColor: '#4cc9f0'
-        },
-        {
-            title: 'Salão de Festas - Apto 305',
-            start: new Date(new Date().setDate(new Date().getDate() + 7)),
-            end: new Date(new Date().setDate(new Date().getDate() + 7) + 4 * 60 * 60 * 1000),
-            backgroundColor: '#4895ef',
-            borderColor: '#4895ef'
-        }
-    ]);
-
-    // Botões QR Code
-    $(document).on('click', '.btn-outline-primary', function() {
-        if ($(this).find('i').hasClass('fa-qrcode')) {
-            $('#qrCodeModal').modal('show');
-        }
-    });
-    
-    // Submissão de formulários
-    $('form[id$="Form"]').on('submit', function(e) {
-        e.preventDefault();
-        const $form = $(this);
-        const formName = $form.attr('id').replace('Form', '').replace(/([A-Z])/g, ' $1').trim();
-        const $submitBtn = $form.find('[type="submit"]');
-        const originalText = $submitBtn.html();
-        
-        $submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Processando...');
-        
-        setTimeout(() => {
-            alert(`${formName} enviado com sucesso!`);
-            $form.closest('.modal').modal('hide');
-            $form.trigger('reset');
-            $submitBtn.prop('disabled', false).html(originalText);
-        }, 1500);
-    });
-    
-    // Copiar código PIX
-    $('#copyPixButton').on('click', function() {
-        const pixCode = $(this).siblings('input').val();
-        navigator.clipboard.writeText(pixCode).then(() => {
-            const $button = $(this);
-            const originalText = $button.html();
-            $button.html('<i class="fas fa-check"></i> Copiado!');
-            setTimeout(() => $button.html(originalText), 2000);
-        }).catch(err => {
-            console.error('Falha ao copiar:', err);
-            alert('Não foi possível copiar o código');
-        });
-    });
-    
     // Service Worker para PWA
     if ('serviceWorker' in navigator) {
         $(window).on('load', function() {
@@ -480,5 +326,4 @@ $(document).ready(function() {
             });
         }
     }
-
-    
+});
