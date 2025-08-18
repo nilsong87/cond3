@@ -62,21 +62,27 @@ img {
 }
 
 /* =============== LAYOUT PRINCIPAL =============== */
+.admin-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .app-container {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - var(--topbar-height));
 }
 
 /* Sidebar */
 .app-sidebar {
   width: var(--sidebar-width);
-  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  background: linear-gradient(135deg, #1e293b, #0f172a);
   color: white;
   height: 100vh;
   position: fixed;
   transition: var(--transition);
   z-index: 1000;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-lg);
   left: 0;
 }
 
@@ -103,7 +109,7 @@ img {
   border-radius: 50%;
   margin-right: 0.9375rem;
   object-fit: cover;
-  border: 3px solid rgba(255, 255, 255, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
 .user-info {
@@ -138,7 +144,7 @@ img {
   display: flex;
   align-items: center;
   padding: 0.75rem 1.25rem;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   transition: var(--transition);
 }
 
@@ -153,9 +159,9 @@ img {
 }
 
 .sidebar-menu .active a {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.15);
   color: white;
-  border-left: 3px solid white;
+  border-left: 3px solid var(--info-color);
 }
 
 /* Conteúdo Principal */
@@ -163,6 +169,7 @@ img {
   margin-left: var(--sidebar-width);
   width: calc(100% - var(--sidebar-width));
   transition: var(--transition);
+  flex: 1;
 }
 
 .app-header {
@@ -200,8 +207,8 @@ img {
 }
 
 .card-header {
-  background-color: white;
-  border-bottom: 1px solid var(--border-color);
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
   padding: 0.9375rem 1.25rem;
   border-radius: var(--radius-md) var(--radius-md) 0 0 !important;
   display: flex;
@@ -250,13 +257,15 @@ img {
 .badge {
   display: inline-block;
   padding: 0.35em 0.65em;
-  font-size: 0.75em;
+  font-size: 0.65rem;
   font-weight: 500;
   line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .bg-primary { background-color: var(--primary-color); }
@@ -286,12 +295,41 @@ img {
   white-space: nowrap;
   padding: 0.75rem;
   text-align: left;
+  background-color: #f1f5f9;
 }
 
 .table td {
   vertical-align: middle;
   border-top: 1px solid var(--border-color);
   padding: 0.75rem;
+}
+
+/* Seções de Conteúdo */
+.content-section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.content-section.active {
+  display: block;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.section-header h2 {
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* =============== RESPONSIVIDADE =============== */
@@ -359,61 +397,325 @@ img {
   }
 }
 
-/* =============== TEMA ADMIN =============== */
-.admin-app {
-  /* Mantém o estilo base mas com cores mais sóbrias */
+/* =============== COMPONENTES ESPECÍFICOS ADMIN =============== */
+/* Cards de Estatísticas */
+.stat-card {
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  margin-bottom: 1.25rem;
 }
 
-.admin-app .app-sidebar {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
+.stat-card:hover {
+  transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
 }
 
-.admin-app .sidebar-menu a {
-  color: rgba(255, 255, 255, 0.85);
+.stat-icon {
+  font-size: 2rem;
+  margin-right: 0.9375rem;
+  opacity: 0.8;
 }
 
-.admin-app .sidebar-menu .active a {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-left: 3px solid var(--info-color);
-  color: white;
+.stat-info h3 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
 }
 
-.admin-app .sidebar-menu a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.stat-info p {
+  margin: 0.3125rem 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
-.admin-app .card-header {
-  background-color: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+/* Formulários */
+.form-control {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  transition: var(--transition);
 }
 
-.admin-app .user-avatar {
-  border-color: rgba(255, 255, 255, 0.3);
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
 }
 
-/* Melhorias específicas para admin */
-.admin-app .content-section {
-  display: none;
-}
-
-.admin-app .content-section.active {
+.form-label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
   display: block;
-  animation: fadeIn 0.3s ease;
 }
 
+/* Modais */
+.modal-content {
+  border: none;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 1.25rem;
+  background-color: #f8fafc;
+}
+
+.modal-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+.modal-body {
+  padding: 1.25rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1rem 1.25rem;
+  background-color: #f8fafc;
+}
+
+/* Gráficos */
+.chart-container {
+  position: relative;
+  height: 250px;
+  width: 100%;
+}
+
+/* ==============================================
+   RESPONSIVIDADE
+   ============================================== */
+@media (max-width: 992px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+  
+  .app-sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .app-main {
+    margin-left: 0;
+    width: 100%;
+  }
+  
+  .app-header {
+    width: 100%;
+  }
+  
+  .sidebar-toggle {
+    display: block;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .section-header h2 {
+    margin-bottom: 0.625rem;
+  }
+  
+  .header-actions {
+    margin-left: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    padding: 0.9375rem;
+  }
+  
+  .card-body {
+    padding: 0.9375rem;
+  }
+  
+  .stat-card {
+    padding: 0.9375rem;
+  }
+  
+  .stat-info h3 {
+    font-size: 1.5rem;
+  }
+}
+
+/* ==============================================
+   ANIMAÇÕES
+   ============================================== */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Ajustes para tabelas no admin */
-.admin-app .table th {
-  background-color: #f1f5f9;
+.animate__animated {
+  animation-duration: 0.3s;
+  animation-fill-mode: both;
 }
 
-.admin-app .badge {
-  text-transform: uppercase;
-  font-size: 0.65rem;
-  letter-spacing: 0.5px;
+/* Estilos para o menu hamburguer em mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.app-sidebar.active {
+    transform: translateX(0);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+/* Mostrar botão apenas em mobile */
+.sidebar-toggle {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .sidebar-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--dark-color);
+        cursor: pointer;
+    }
+    
+    .app-main {
+        margin-left: 0;
+    }
+}
+
+/* Menu Hamburguer */
+.sidebar-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    margin-right: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.app-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.app-sidebar.active {
+    transform: translateX(0);
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+@media (max-width: 992px) {
+    .sidebar-toggle {
+        display: block;
+    }
+    
+    .app-main {
+        margin-left: 0;
+    }
+}
+
+/* =============== MENU HAMBURGUER COM ROLAGEM =============== */
+.app-sidebar {
+  width: var(--sidebar-width);
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  height: 100vh;
+  position: fixed;
+  transition: var(--transition);
+  z-index: 1000;
+  box-shadow: var(--shadow-lg);
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Garante que nada ultrapasse os limites */
+}
+
+.sidebar-header {
+  padding: 1.25rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0; /* Impede que o cabeçalho encolha */
+}
+
+.sidebar-menu-container {
+  flex: 1; /* Ocupa todo espaço disponível */
+  overflow-y: auto; /* Habilita rolagem vertical quando necessário */
+  padding-bottom: 1rem; /* Espaço no final */
+  scrollbar-width: thin; /* Para navegadores Firefox */
+  scrollbar-color: rgba(255,255,255,0.2) transparent; /* Firefox */
+}
+
+/* Personalização da barra de rolagem para Chrome/Edge/Safari */
+.sidebar-menu-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-menu-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu-container::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 3px;
+}
+
+.sidebar-menu-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255,255,255,0.3);
+}
+
+.sidebar-menu {
+  padding: 1.25rem 0;
+  min-height: min-content; /* Garante que o menu tenha altura suficiente */
+}
+
