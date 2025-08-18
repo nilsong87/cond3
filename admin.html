@@ -1,0 +1,2048 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condomínio Premium - Painel Admin</title>
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="admin-app">
+    <!-- App Container -->
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="app-sidebar">
+            <div class="sidebar-header">
+                <img src="assets/images/logo-white.png" alt="Condomínio Premium" class="sidebar-logo">
+                <div class="user-profile">
+                    <img src="assets/images/admin-avatar.jpg" alt="Administrador" class="user-avatar">
+                    <div class="user-info">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Síndico</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li class="active"><a href="#dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="#packages"><i class="fas fa-box-open"></i> Encomendas</a></li>
+                    <li><a href="#reservations"><i class="fas fa-calendar-check"></i> Reservas</a></li>
+                    <li><a href="#occurrences"><i class="fas fa-exclamation-circle"></i> Ocorrências</a></li>
+                    <li><a href="#voting"><i class="fas fa-vote-yea"></i> Votações</a></li>
+                    <li><a href="#lost-found"><i class="fas fa-search"></i> Achados e Perdidos</a></li>
+                    <li><a href="#visitors"><i class="fas fa-user-friends"></i> Visitantes</a></li>
+                    <li><a href="#residents"><i class="fas fa-users"></i> Moradores</a></li>
+                    <li><a href="#reports"><i class="fas fa-chart-bar"></i> Relatórios</a></li>
+                    <li><a href="#settings"><i class="fas fa-cog"></i> Configurações</a></li>
+                    <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Sair</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="app-version">Admin v1.0.0</div>
+            </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="app-main">
+            <!-- Top Bar -->
+            <header class="app-header">
+                <button class="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="header-title">Dashboard</div>
+                <div class="header-actions">
+                    <button class="btn btn-notification" data-bs-toggle="dropdown">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge bg-danger">5</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end notification-dropdown">
+                        <div class="notification-header">
+                            <h6>Notificações</h6>
+                            <small>5 novas</small>
+                        </div>
+                        <div class="notification-list">
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-primary">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>2 novas encomendas</p>
+                                    <small>10 minutos atrás</small>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-success">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Nova reserva solicitada</p>
+                                    <small>1 hora atrás</small>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-warning">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Nova ocorrência registrada</p>
+                                    <small>2 horas atrás</small>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-info">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>Visitante agendado para hoje</p>
+                                    <small>Ontem, 18:30</small>
+                                </div>
+                            </a>
+                            <a href="#" class="notification-item unread">
+                                <div class="notification-icon bg-danger">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="notification-content">
+                                    <p>2 moradores com taxas atrasadas</p>
+                                    <small>Ontem, 16:45</small>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="notification-footer">
+                            <a href="#">Ver todas</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content Area -->
+            <div class="app-content">
+                <!-- Dashboard -->
+                <section id="dashboard-section" class="content-section active">
+                    <div class="section-header">
+                        <h2>Dashboard Administrativo</h2>
+                        <small>Visão geral do condomínio</small>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Quick Stats -->
+                        <div class="col-md-3">
+                            <div class="stat-card bg-primary">
+                                <div class="stat-icon">
+                                    <i class="fas fa-box-open"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>12</h3>
+                                    <p>Encomendas Hoje</p>
+                                    <small class="text-white">+2 desde ontem</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-success">
+                                <div class="stat-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>8</h3>
+                                    <p>Reservas Esta Semana</p>
+                                    <small class="text-white">3 pendentes</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-warning">
+                                <div class="stat-icon">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>5</h3>
+                                    <p>Ocorrências Abertas</p>
+                                    <small class="text-white">2 novas hoje</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="stat-card bg-danger">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <h3>7</h3>
+                                    <p>Taxas Atrasadas</p>
+                                    <small class="text-white">+1 este mês</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Charts Row -->
+                    <div class="row mt-4">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Atividades Recentes</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="activitiesChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Status de Ocorrências</h5>
+                                </div>
+                                <div class="card-body">
+                                    <canvas id="occurrencesChart" height="250"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Recent Activities -->
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Últimas Encomendas</h5>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Ver todas</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Apartamento</th>
+                                                    <th>Descrição</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Apto 102</td>
+                                                    <td>Pacote Amazon</td>
+                                                    <td><span class="badge bg-success">Recebido</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 305</td>
+                                                    <td>Documentos</td>
+                                                    <td><span class="badge bg-warning">Aguardando</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 201</td>
+                                                    <td>Encomenda pequena</td>
+                                                    <td><span class="badge bg-success">Recebido</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 410</td>
+                                                    <td>Floricultura</td>
+                                                    <td><span class="badge bg-danger">Urgente</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Últimas Ocorrências</h5>
+                                    <a href="#" class="btn btn-sm btn-outline-primary">Ver todas</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Apartamento</th>
+                                                    <th>Tipo</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Apto 102</td>
+                                                    <td>Barulho</td>
+                                                    <td><span class="badge bg-warning">Em análise</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 501</td>
+                                                    <td>Vazamento</td>
+                                                    <td><span class="badge bg-info">Em andamento</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 302</td>
+                                                    <td>Elevador</td>
+                                                    <td><span class="badge bg-success">Resolvido</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Apto 105</td>
+                                                    <td>Limpeza</td>
+                                                    <td><span class="badge bg-warning">Pendente</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Encomendas -->
+                <section id="packages-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Encomendas</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewPackageModal">
+                                <i class="fas fa-plus"></i> Nova Encomenda
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-print"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="packagesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Código</th>
+                                            <th>Apartamento</th>
+                                            <th>Descrição</th>
+                                            <th>Remetente</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>15/06/2023 14:30</td>
+                                            <td>PKG-78945</td>
+                                            <td>Apto 102</td>
+                                            <td>Pacote Amazon</td>
+                                            <td>Amazon Brasil</td>
+                                            <td><span class="badge bg-success">Recebido</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>15/06/2023 10:15</td>
+                                            <td>PKG-78946</td>
+                                            <td>Apto 305</td>
+                                            <td>Documentos</td>
+                                            <td>Cartório XYZ</td>
+                                            <td><span class="badge bg-warning">Aguardando</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>14/06/2023 16:45</td>
+                                            <td>PKG-78944</td>
+                                            <td>Apto 201</td>
+                                            <td>Encomenda pequena</td>
+                                            <td>Correios</td>
+                                            <td><span class="badge bg-success">Recebido</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>14/06/2023 09:30</td>
+                                            <td>PKG-78943</td>
+                                            <td>Apto 410</td>
+                                            <td>Floricultura</td>
+                                            <td>Flores & Cia</td>
+                                            <td><span class="badge bg-danger">Urgente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Reservas -->
+                <section id="reservations-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Reservas</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewReservationModal">
+                                <i class="fas fa-plus"></i> Nova Reserva
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-print"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="admin-reservation-calendar"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5>Todas as Reservas</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="reservationsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Área</th>
+                                            <th>Morador</th>
+                                            <th>Data</th>
+                                            <th>Horário</th>
+                                            <th>Status</th>
+                                            <th>Pagamento</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Churrasqueira</td>
+                                            <td>Apto 102 - João Silva</td>
+                                            <td>17/06/2023</td>
+                                            <td>15:00 - 18:00</td>
+                                            <td><span class="badge bg-success">Confirmada</span></td>
+                                            <td><span class="badge bg-success">Pago</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Salão de Festas</td>
+                                            <td>Apto 305 - Maria Oliveira</td>
+                                            <td>25/06/2023</td>
+                                            <td>19:00 - 23:00</td>
+                                            <td><span class="badge bg-warning">Pendente</span></td>
+                                            <td><span class="badge bg-warning">Aguardando</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-money-bill-wave"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Quadra</td>
+                                            <td>Apto 201 - Carlos Souza</td>
+                                            <td>20/06/2023</td>
+                                            <td>09:00 - 11:00</td>
+                                            <td><span class="badge bg-success">Confirmada</span></td>
+                                            <td><span class="badge bg-success">Pago</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sala de Jogos</td>
+                                            <td>Apto 410 - Ana Pereira</td>
+                                            <td>18/06/2023</td>
+                                            <td>14:00 - 16:00</td>
+                                            <td><span class="badge bg-danger">Cancelada</span></td>
+                                            <td><span class="badge bg-secondary">Estornado</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Ocorrências -->
+                <section id="occurrences-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Ocorrências</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewOccurrenceModal">
+                                <i class="fas fa-plus"></i> Nova Ocorrência
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-print"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="occurrencesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Data</th>
+                                            <th>Morador</th>
+                                            <th>Tipo</th>
+                                            <th>Descrição</th>
+                                            <th>Status</th>
+                                            <th>Prioridade</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>14/06/2023 23:15</td>
+                                            <td>Apto 102 - João Silva</td>
+                                            <td>Barulho</td>
+                                            <td>Barulho excessivo após 22h</td>
+                                            <td><span class="badge bg-warning">Em análise</span></td>
+                                            <td><span class="badge bg-warning">Média</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>14/06/2023 10:30</td>
+                                            <td>Apto 501 - Pedro Almeida</td>
+                                            <td>Infraestrutura</td>
+                                            <td>Vazamento no corredor</td>
+                                            <td><span class="badge bg-info">Em andamento</span></td>
+                                            <td><span class="badge bg-danger">Alta</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>12/06/2023 08:45</td>
+                                            <td>Apto 302 - Luiza Costa</td>
+                                            <td>Elevador</td>
+                                            <td>Elevador social parado</td>
+                                            <td><span class="badge bg-success">Resolvido</span></td>
+                                            <td><span class="badge bg-danger">Alta</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>10/06/2023 14:20</td>
+                                            <td>Apto 105 - Marcos Santos</td>
+                                            <td>Limpeza</td>
+                                            <td>Lixo acumulado no corredor</td>
+                                            <td><span class="badge bg-warning">Pendente</span></td>
+                                            <td><span class="badge bg-success">Baixa</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-success">
+                                                    <i class="fas fa-check"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Votações -->
+                <section id="voting-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Votações</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newVotingModal">
+                                <i class="fas fa-plus"></i> Nova Votação
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card voting-card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5>Reforma da Piscina</h5>
+                                    <small>Encerra em 20/06/2023</small>
+                                </div>
+                                <div class="card-body">
+                                    <p>Proposta de reforma completa da área da piscina, incluindo novo piso antiderrapante e sistema de filtragem.</p>
+                                    <div class="voting-stats mb-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="stat-item">
+                                                    <h6>65%</h6>
+                                                    <small>Votos Sim</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="stat-item">
+                                                    <h6>35%</h6>
+                                                    <small>Votos Não</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="voting-participation">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 78%">78% de participação</div>
+                                        </div>
+                                    </div>
+                                    <div class="voting-actions mt-3">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-chart-pie"></i> Estatísticas
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-envelope"></i> Lembrar Moradores
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-times"></i> Encerrar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card voting-card">
+                                <div class="card-header bg-primary text-white">
+                                    <h5>Novo Horário de Silêncio</h5>
+                                    <small>Encerra em 25/06/2023</small>
+                                </div>
+                                <div class="card-body">
+                                    <p>Mudança do horário de silêncio obrigatório das 22h às 8h para 23h às 7h.</p>
+                                    <div class="voting-stats mb-3">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="stat-item">
+                                                    <h6>42%</h6>
+                                                    <small>Votos Sim</small>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="stat-item">
+                                                    <h6>58%</h6>
+                                                    <small>Votos Não</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="voting-participation">
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 65%">65% de participação</div>
+                                        </div>
+                                    </div>
+                                    <div class="voting-actions mt-3">
+                                        <button class="btn btn-sm btn-outline-primary">
+                                            <i class="fas fa-chart-pie"></i> Estatísticas
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-secondary">
+                                            <i class="fas fa-envelope"></i> Lembrar Moradores
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger">
+                                            <i class="fas fa-times"></i> Encerrar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5>Votações Anteriores</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="votingTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Data</th>
+                                            <th>Resultado</th>
+                                            <th>Participação</th>
+                                            <th>Detalhes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Instalação de Câmeras</td>
+                                            <td>01/05/2023</td>
+                                            <td>Aprovado (78%)</td>
+                                            <td>82%</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Aumento da Taxa Condominial</td>
+                                            <td>15/04/2023</td>
+                                            <td>Rejeitado (62%)</td>
+                                            <td>75%</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Novo Horário do Portão</td>
+                                            <td>01/04/2023</td>
+                                            <td>Aprovado (65%)</td>
+                                            <td>71%</td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Achados e Perdidos -->
+                <section id="lost-found-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Achados e Perdidos</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewLostItemModal">
+                                <i class="fas fa-plus"></i> Novo Item
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card lost-item-card">
+                                <img src="assets/images/lost-item1.jpg" class="card-img-top" alt="Item perdido">
+                                <div class="card-body">
+                                    <h5 class="card-title">Chave com Chaveiro</h5>
+                                    <p class="card-text">Encontrado na área da piscina no dia 10/06</p>
+                                    <div class="item-meta">
+                                        <span class="badge bg-info">Achado</span>
+                                        <small class="text-muted">Postado em 11/06/2023</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-check"></i> Devolver
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card lost-item-card">
+                                <img src="assets/images/lost-item2.jpg" class="card-img-top" alt="Item perdido">
+                                <div class="card-body">
+                                    <h5 class="card-title">Relógio Masculino</h5>
+                                    <p class="card-text">Perdido no elevador social no dia 08/06</p>
+                                    <div class="item-meta">
+                                        <span class="badge bg-warning">Perdido</span>
+                                        <small class="text-muted">Postado em 09/06/2023</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-outline-success">
+                                        <i class="fas fa-check"></i> Encontrado
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="card lost-item-card">
+                                <img src="assets/images/lost-item3.jpg" class="card-img-top" alt="Item perdido">
+                                <div class="card-body">
+                                    <h5 class="card-title">Óculos de Sol</h5>
+                                    <p class="card-text">Encontrado no estacionamento no dia 05/06</p>
+                                    <div class="item-meta">
+                                        <span class="badge bg-success">Devolvido</span>
+                                        <small class="text-muted">Postado em 06/06/2023</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button class="btn btn-sm btn-outline-secondary disabled">
+                                        Resolvido
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Visitantes -->
+                <section id="visitors-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Visitantes</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewVisitorModal">
+                                <i class="fas fa-plus"></i> Novo Visitante
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-print"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="visitorsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Documento</th>
+                                            <th>Morador</th>
+                                            <th>Data</th>
+                                            <th>Horário</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Maria Oliveira</td>
+                                            <td>CPF: ***.456.789-**</td>
+                                            <td>Apto 102 - João Silva</td>
+                                            <td>18/06/2023</td>
+                                            <td>14:00 - 16:00</td>
+                                            <td><span class="badge bg-success">Confirmado</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Carlos Souza</td>
+                                            <td>CPF: ***.123.456-**</td>
+                                            <td>Apto 305 - Maria Oliveira</td>
+                                            <td>20/06/2023</td>
+                                            <td>19:00 - 22:00</td>
+                                            <td><span class="badge bg-warning">Pendente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ana Pereira</td>
+                                            <td>CPF: ***.789.123-**</td>
+                                            <td>Apto 201 - Carlos Souza</td>
+                                            <td>12/06/2023</td>
+                                            <td>10:00 - 12:00</td>
+                                            <td><span class="badge bg-secondary">Finalizado</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-secondary">
+                                                    <i class="fas fa-eye"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Moradores -->
+                <section id="residents-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Gestão de Moradores</h2>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newResidentModal">
+                                <i class="fas fa-plus"></i> Novo Morador
+                            </button>
+                            <button class="btn btn-outline-secondary">
+                                <i class="fas fa-print"></i> Relatório
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover" id="residentsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Apartamento</th>
+                                            <th>Nome</th>
+                                            <th>E-mail</th>
+                                            <th>Telefone</th>
+                                            <th>Status</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Apto 102</td>
+                                            <td>João Silva</td>
+                                            <td>joao.silva@email.com</td>
+                                            <td>(11) 98765-4321</td>
+                                            <td><span class="badge bg-success">Ativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apto 201</td>
+                                            <td>Carlos Souza</td>
+                                            <td>carlos.souza@email.com</td>
+                                            <td>(11) 91234-5678</td>
+                                            <td><span class="badge bg-success">Ativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apto 305</td>
+                                            <td>Maria Oliveira</td>
+                                            <td>maria.oliveira@email.com</td>
+                                            <td>(11) 99876-5432</td>
+                                            <td><span class="badge bg-warning">Pendente</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Apto 410</td>
+                                            <td>Ana Pereira</td>
+                                            <td>ana.pereira@email.com</td>
+                                            <td>(11) 94567-8901</td>
+                                            <td><span class="badge bg-danger">Inativo</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Relatórios -->
+                <section id="reports-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Relatórios</h2>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="report-card">
+                                        <div class="report-header">
+                                            <h5>Encomendas</h5>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-download"></i> Exportar
+                                            </button>
+                                        </div>
+                                        <div class="report-body">
+                                            <form class="mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="packageReportStart" class="form-label">Data Início</label>
+                                                        <input type="date" class="form-control" id="packageReportStart">
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="packageReportEnd" class="form-label">Data Fim</label>
+                                                        <input type="date" class="form-control" id="packageReportEnd">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="packageReportStatus" class="form-label">Status</label>
+                                                    <select class="form-select" id="packageReportStatus">
+                                                        <option value="">Todos</option>
+                                                        <option value="received">Recebidos</option>
+                                                        <option value="waiting">Aguardando</option>
+                                                        <option value="delivered">Entregues</option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="report-card">
+                                        <div class="report-header">
+                                            <h5>Reservas</h5>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-download"></i> Exportar
+                                            </button>
+                                        </div>
+                                        <div class="report-body">
+                                            <form class="mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="reservationReportStart" class="form-label">Data Início</label>
+                                                        <input type="date" class="form-control" id="reservationReportStart">
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="reservationReportEnd" class="form-label">Data Fim</label>
+                                                        <input type="date" class="form-control" id="reservationReportEnd">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="reservationReportArea" class="form-label">Área Comum</label>
+                                                    <select class="form-select" id="reservationReportArea">
+                                                        <option value="">Todas</option>
+                                                        <option value="churrasqueira">Churrasqueira</option>
+                                                        <option value="salao_festas">Salão de Festas</option>
+                                                        <option value="quadra">Quadra Poliesportiva</option>
+                                                        <option value="sala_jogos">Sala de Jogos</option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <div class="report-card">
+                                        <div class="report-header">
+                                            <h5>Ocorrências</h5>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-download"></i> Exportar
+                                            </button>
+                                        </div>
+                                        <div class="report-body">
+                                            <form class="mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="occurrenceReportStart" class="form-label">Data Início</label>
+                                                        <input type="date" class="form-control" id="occurrenceReportStart">
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="occurrenceReportEnd" class="form-label">Data Fim</label>
+                                                        <input type="date" class="form-control" id="occurrenceReportEnd">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="occurrenceReportType" class="form-label">Tipo</label>
+                                                    <select class="form-select" id="occurrenceReportType">
+                                                        <option value="">Todos</option>
+                                                        <option value="noise">Barulho</option>
+                                                        <option value="infrastructure">Infraestrutura</option>
+                                                        <option value="security">Segurança</option>
+                                                        <option value="cleaning">Limpeza</option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <div class="report-card">
+                                        <div class="report-header">
+                                            <h5>Financeiro</h5>
+                                            <button class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-download"></i> Exportar
+                                            </button>
+                                        </div>
+                                        <div class="report-body">
+                                            <form class="mb-3">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="financialReportMonth" class="form-label">Mês</label>
+                                                        <select class="form-select" id="financialReportMonth">
+                                                            <option value="1">Janeiro</option>
+                                                            <option value="2">Fevereiro</option>
+                                                            <option value="3">Março</option>
+                                                            <option value="4">Abril</option>
+                                                            <option value="5">Maio</option>
+                                                            <option value="6" selected>Junho</option>
+                                                            <option value="7">Julho</option>
+                                                            <option value="8">Agosto</option>
+                                                            <option value="9">Setembro</option>
+                                                            <option value="10">Outubro</option>
+                                                            <option value="11">Novembro</option>
+                                                            <option value="12">Dezembro</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-2">
+                                                        <label for="financialReportYear" class="form-label">Ano</label>
+                                                        <input type="number" class="form-control" id="financialReportYear" value="2023" min="2020" max="2030">
+                                                    </div>
+                                                </div>
+                                                <div class="mb-2">
+                                                    <label for="financialReportType" class="form-label">Tipo</label>
+                                                    <select class="form-select" id="financialReportType">
+                                                        <option value="">Todos</option>
+                                                        <option value="condominium">Taxa Condominial</option>
+                                                        <option value="reservation">Reservas</option>
+                                                        <option value="other">Outros</option>
+                                                    </select>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Configurações -->
+                <section id="settings-section" class="content-section">
+                    <div class="section-header">
+                        <h2>Configurações do Sistema</h2>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs" id="settingsTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button">Geral</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="areas-tab" data-bs-toggle="tab" data-bs-target="#areas" type="button">Áreas Comuns</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button">Notificações</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button">Usuários Admin</button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content mt-3" id="settingsTabContent">
+                                <!-- Geral -->
+                                <div class="tab-pane fade show active" id="general" role="tabpanel">
+                                    <form id="generalSettingsForm">
+                                        <div class="mb-3">
+                                            <label for="condominiumName" class="form-label">Nome do Condomínio</label>
+                                            <input type="text" class="form-control" id="condominiumName" value="Condomínio Premium">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="condominiumAddress" class="form-label">Endereço</label>
+                                            <input type="text" class="form-control" id="condominiumAddress" value="Av. Paulista, 1000 - São Paulo/SP">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="condominiumLogo" class="form-label">Logo</label>
+                                            <input type="file" class="form-control" id="condominiumLogo">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="condominiumRules" class="form-label">Regras do Condomínio</label>
+                                            <textarea class="form-control" id="condominiumRules" rows="5">1. Respeitar o horário de silêncio das 22h às 8h
+2. Manter as áreas comuns limpas e organizadas
+3. Não é permitido fumar nas áreas comuns
+4. Animais devem estar sempre com coleira e guia</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Salvar Configurações</button>
+                                    </form>
+                                </div>
+                                
+                                <!-- Áreas Comuns -->
+                                <div class="tab-pane fade" id="areas" role="tabpanel">
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAreaModal">
+                                            <i class="fas fa-plus"></i> Nova Área
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Capacidade</th>
+                                                    <th>Taxa</th>
+                                                    <th>Horário Funcionamento</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Churrasqueira</td>
+                                                    <td>20 pessoas</td>
+                                                    <td>R$ 50,00</td>
+                                                    <td>09:00 - 22:00</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Salão de Festas</td>
+                                                    <td>50 pessoas</td>
+                                                    <td>R$ 150,00</td>
+                                                    <td>08:00 - 00:00</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Quadra Poliesportiva</td>
+                                                    <td>10 pessoas</td>
+                                                    <td>R$ 30,00</td>
+                                                    <td>07:00 - 21:00</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sala de Jogos</td>
+                                                    <td>8 pessoas</td>
+                                                    <td>R$ 20,00</td>
+                                                    <td>10:00 - 22:00</td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <!-- Notificações -->
+                                <div class="tab-pane fade" id="notifications" role="tabpanel">
+                                    <form id="notificationSettingsForm">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tipos de Notificação</label>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="notifyNewPackage" checked>
+                                                <label class="form-check-label" for="notifyNewPackage">
+                                                    Nova encomenda registrada
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="notifyReservation" checked>
+                                                <label class="form-check-label" for="notifyReservation">
+                                                    Nova reserva solicitada
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="notifyOccurrence" checked>
+                                                <label class="form-check-label" for="notifyOccurrence">
+                                                    Nova ocorrência registrada
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="notifyVisitor" checked>
+                                                <label class="form-check-label" for="notifyVisitor">
+                                                    Visitante agendado
+                                                </label>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="notificationEmail" class="form-label">E-mail para Notificações</label>
+                                            <input type="email" class="form-control" id="notificationEmail" value="admin@condominiopremium.com">
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="notificationWhatsApp" class="form-label">WhatsApp para Notificações</label>
+                                            <input type="tel" class="form-control" id="notificationWhatsApp" value="+5511987654321">
+                                        </div>
+                                        
+                                        <button type="submit" class="btn btn-primary">Salvar Configurações</button>
+                                    </form>
+                                </div>
+                                
+                                <!-- Usuários Admin -->
+                                <div class="tab-pane fade" id="users" role="tabpanel">
+                                    <div class="mb-3">
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAdminUserModal">
+                                            <i class="fas fa-plus"></i> Novo Usuário
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>E-mail</th>
+                                                    <th>Função</th>
+                                                    <th>Último Acesso</th>
+                                                    <th>Status</th>
+                                                    <th>Ações</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Administrador</td>
+                                                    <td>admin@condominiopremium.com</td>
+                                                    <td>Síndico</td>
+                                                    <td>Hoje, 09:15</td>
+                                                    <td><span class="badge bg-success">Ativo</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Portaria</td>
+                                                    <td>portaria@condominiopremium.com</td>
+                                                    <td>Portaria</td>
+                                                    <td>Ontem, 20:30</td>
+                                                    <td><span class="badge bg-success">Ativo</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Zeladoria</td>
+                                                    <td>zeladoria@condominiopremium.com</td>
+                                                    <td>Zelador</td>
+                                                    <td>Ontem, 18:45</td>
+                                                    <td><span class="badge bg-success">Ativo</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="btn btn-sm btn-outline-danger">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Modals -->
+    <!-- New Package Modal -->
+    <div class="modal fade" id="adminNewPackageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Nova Encomenda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminNewPackageForm">
+                        <div class="mb-3">
+                            <label for="adminPackageResident" class="form-label">Morador</label>
+                            <select class="form-select" id="adminPackageResident" required>
+                                <option value="">Selecione...</option>
+                                <option value="102">Apto 102 - João Silva</option>
+                                <option value="201">Apto 201 - Carlos Souza</option>
+                                <option value="305">Apto 305 - Maria Oliveira</option>
+                                <option value="410">Apto 410 - Ana Pereira</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPackageDescription" class="form-label">Descrição</label>
+                            <input type="text" class="form-control" id="adminPackageDescription" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPackageSender" class="form-label">Remetente</label>
+                            <input type="text" class="form-control" id="adminPackageSender" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPackageTracking" class="form-label">Código de Rastreamento (opcional)</label>
+                            <input type="text" class="form-control" id="adminPackageTracking">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPackageStatus" class="form-label">Status</label>
+                            <select class="form-select" id="adminPackageStatus" required>
+                                <option value="received">Recebido</option>
+                                <option value="waiting">Aguardando</option>
+                                <option value="delivered">Entregue</option>
+                                <option value="urgent">Urgente</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPackageNotes" class="form-label">Observações</label>
+                            <textarea class="form-control" id="adminPackageNotes" rows="3"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar Encomenda</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Reservation Modal -->
+    <div class="modal fade" id="adminNewReservationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Reserva</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminNewReservationForm">
+                        <div class="mb-3">
+                            <label for="adminReservationResident" class="form-label">Morador</label>
+                            <select class="form-select" id="adminReservationResident" required>
+                                <option value="">Selecione...</option>
+                                <option value="102">Apto 102 - João Silva</option>
+                                <option value="201">Apto 201 - Carlos Souza</option>
+                                <option value="305">Apto 305 - Maria Oliveira</option>
+                                <option value="410">Apto 410 - Ana Pereira</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminReservationArea" class="form-label">Área Comum</label>
+                            <select class="form-select" id="adminReservationArea" required>
+                                <option value="">Selecione...</option>
+                                <option value="churrasqueira">Churrasqueira</option>
+                                <option value="salao_festas">Salão de Festas</option>
+                                <option value="quadra">Quadra Poliesportiva</option>
+                                <option value="sala_jogos">Sala de Jogos</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminReservationDate" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="adminReservationDate" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="adminStartTime" class="form-label">Hora Início</label>
+                                <input type="time" class="form-control" id="adminStartTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="adminEndTime" class="form-label">Hora Fim</label>
+                                <input type="time" class="form-control" id="adminEndTime" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminReservationGuests" class="form-label">Número de Convidados</label>
+                            <input type="number" class="form-control" id="adminReservationGuests" min="1" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminReservationStatus" class="form-label">Status</label>
+                            <select class="form-select" id="adminReservationStatus" required>
+                                <option value="pending">Pendente</option>
+                                <option value="confirmed">Confirmada</option>
+                                <option value="canceled">Cancelada</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminReservationPayment" class="form-label">Pagamento</label>
+                            <select class="form-select" id="adminReservationPayment" required>
+                                <option value="pending">Aguardando</option>
+                                <option value="paid">Pago</option>
+                                <option value="refunded">Estornado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar Reserva</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Occurrence Modal -->
+    <div class="modal fade" id="adminNewOccurrenceModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Nova Ocorrência</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminNewOccurrenceForm">
+                        <div class="mb-3">
+                            <label for="adminOccurrenceResident" class="form-label">Morador</label>
+                            <select class="form-select" id="adminOccurrenceResident" required>
+                                <option value="">Selecione...</option>
+                                <option value="102">Apto 102 - João Silva</option>
+                                <option value="201">Apto 201 - Carlos Souza</option>
+                                <option value="305">Apto 305 - Maria Oliveira</option>
+                                <option value="410">Apto 410 - Ana Pereira</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrenceType" class="form-label">Tipo de Ocorrência</label>
+                            <select class="form-select" id="adminOccurrenceType" required>
+                                <option value="">Selecione...</option>
+                                <option value="noise">Barulho Excessivo</option>
+                                <option value="infrastructure">Problema de Infraestrutura</option>
+                                <option value="security">Problema de Segurança</option>
+                                <option value="cleaning">Problema de Limpeza</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrenceLocation" class="form-label">Local</label>
+                            <input type="text" class="form-control" id="adminOccurrenceLocation" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrenceDate" class="form-label">Data e Hora</label>
+                            <input type="datetime-local" class="form-control" id="adminOccurrenceDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrenceDescription" class="form-label">Descrição Detalhada</label>
+                            <textarea class="form-control" id="adminOccurrenceDescription" rows="4" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrenceStatus" class="form-label">Status</label>
+                            <select class="form-select" id="adminOccurrenceStatus" required>
+                                <option value="pending">Pendente</option>
+                                <option value="in_progress">Em andamento</option>
+                                <option value="resolved">Resolvido</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrencePriority" class="form-label">Prioridade</label>
+                            <select class="form-select" id="adminOccurrencePriority" required>
+                                <option value="low">Baixa</option>
+                                <option value="medium">Média</option>
+                                <option value="high">Alta</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminOccurrencePhotos" class="form-label">Fotos (opcional)</label>
+                            <input type="file" class="form-control" id="adminOccurrencePhotos" multiple accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar Ocorrência</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Voting Modal -->
+    <div class="modal fade" id="newVotingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Criar Nova Votação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newVotingForm">
+                        <div class="mb-3">
+                            <label for="votingTitle" class="form-label">Título</label>
+                            <input type="text" class="form-control" id="votingTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="votingDescription" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="votingDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="votingStartDate" class="form-label">Data de Início</label>
+                            <input type="date" class="form-control" id="votingStartDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="votingEndDate" class="form-label">Data de Término</label>
+                            <input type="date" class="form-control" id="votingEndDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Opções</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="votingOptionYes" checked disabled>
+                                <label class="form-check-label" for="votingOptionYes">
+                                    Sim
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="votingOptionNo" checked disabled>
+                                <label class="form-check-label" for="votingOptionNo">
+                                    Não
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="votingAttachment" class="form-label">Anexo (opcional)</label>
+                            <input type="file" class="form-control" id="votingAttachment">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Criar Votação</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Lost Item Modal -->
+    <div class="modal fade" id="adminNewLostItemModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Item Achado/Perdido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminNewLostItemForm">
+                        <div class="mb-3">
+                            <label class="form-label">Tipo</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemFound" value="found" checked>
+                                <label class="form-check-label" for="adminItemFound">
+                                    Item Achado
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemLost" value="lost">
+                                <label class="form-check-label" for="adminItemLost">
+                                    Item Perdido
+                                </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemName" class="form-label">Nome/Descrição do Item</label>
+                            <input type="text" class="form-control" id="adminItemName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemLocation" class="form-label">Local</label>
+                            <input type="text" class="form-control" id="adminItemLocation" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemDate" class="form-label">Data</label>
+                            <input type="date" class="form-control" id="adminItemDate" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemDescription" class="form-label">Detalhes Adicionais</label>
+                            <textarea class="form-control" id="adminItemDescription" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemPhotos" class="form-label">Fotos</label>
+                            <input type="file" class="form-control" id="adminItemPhotos" accept="image/*" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminItemStatus" class="form-label">Status</label>
+                            <select class="form-select" id="adminItemStatus" required>
+                                <option value="found">Achado</option>
+                                <option value="lost">Perdido</option>
+                                <option value="returned">Devolvido</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar Item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Visitor Modal -->
+    <div class="modal fade" id="adminNewVisitorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Registrar Novo Visitante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminNewVisitorForm">
+                        <div class="mb-3">
+                            <label for="adminVisitorResident" class="form-label">Morador</label>
+                            <select class="form-select" id="adminVisitorResident" required>
+                                <option value="">Selecione...</option>
+                                <option value="102">Apto 102 - João Silva</option>
+                                <option value="201">Apto 201 - Carlos Souza</option>
+                                <option value="305">Apto 305 - Maria Oliveira</option>
+                                <option value="410">Apto 410 - Ana Pereira</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorName" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="adminVisitorName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorDocument" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="adminVisitorDocument" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="adminVisitorPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorDate" class="form-label">Data da Visita</label>
+                            <input type="date" class="form-control" id="adminVisitorDate" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="adminVisitorStartTime" class="form-label">Hora Início</label>
+                                <input type="time" class="form-control" id="adminVisitorStartTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="adminVisitorEndTime" class="form-label">Hora Fim</label>
+                                <input type="time" class="form-control" id="adminVisitorEndTime" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorVehicle" class="form-label">Veículo (opcional)</label>
+                            <input type="text" class="form-control" id="adminVisitorVehicle">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorPlate" class="form-label">Placa (opcional)</label>
+                            <input type="text" class="form-control" id="adminVisitorPlate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminVisitorStatus" class="form-label">Status</label>
+                            <select class="form-select" id="adminVisitorStatus" required>
+                                <option value="pending">Pendente</option>
+                                <option value="confirmed">Confirmado</option>
+                                <option value="completed">Finalizado</option>
+                                <option value="canceled">Cancelado</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Registrar Visitante</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Resident Modal -->
+    <div class="modal fade" id="newResidentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cadastrar Novo Morador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newResidentForm">
+                        <div class="mb-3">
+                            <label for="residentApartment" class="form-label">Apartamento</label>
+                            <input type="text" class="form-control" id="residentApartment" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentName" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="residentName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentEmail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="residentEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="residentPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentDocument" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="residentDocument" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentStatus" class="form-label">Status</label>
+                            <select class="form-select" id="residentStatus" required>
+                                <option value="active">Ativo</option>
+                                <option value="pending">Pendente</option>
+                                <option value="inactive">Inativo</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="residentPassword" class="form-label">Senha Inicial</label>
+                            <input type="password" class="form-control" id="residentPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Cadastrar Morador</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Area Modal -->
+    <div class="modal fade" id="newAreaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nova Área Comum</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newAreaForm">
+                        <div class="mb-3">
+                            <label for="areaName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="areaName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="areaCapacity" class="form-label">Capacidade</label>
+                            <input type="text" class="form-control" id="areaCapacity" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="areaFee" class="form-label">Taxa</label>
+                            <input type="text" class="form-control" id="areaFee" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="areaOpenTime" class="form-label">Horário de Abertura</label>
+                                <input type="time" class="form-control" id="areaOpenTime" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="areaCloseTime" class="form-label">Horário de Fechamento</label>
+                                <input type="time" class="form-control" id="areaCloseTime" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="areaRules" class="form-label">Regras de Uso</label>
+                            <textarea class="form-control" id="areaRules" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="areaPhotos" class="form-label">Fotos</label>
+                            <input type="file" class="form-control" id="areaPhotos" multiple accept="image/*">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Cadastrar Área</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- New Admin User Modal -->
+    <div class="modal fade" id="newAdminUserModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Novo Usuário Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="newAdminUserForm">
+                        <div class="mb-3">
+                            <label for="adminUserName" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="adminUserName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminUserEmail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="adminUserEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminUserRole" class="form-label">Função</label>
+                            <select class="form-select" id="adminUserRole" required>
+                                <option value="admin">Administrador</option>
+                                <option value="syndic">Síndico</option>
+                                <option value="porter">Portaria</option>
+                                <option value="janitor">Zelador</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminUserPassword" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="adminUserPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminUserConfirmPassword" class="form-label">Confirmar Senha</label>
+                            <input type="password" class="form-control" id="adminUserConfirmPassword" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary">Cadastrar Usuário</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- QR Code Modal -->
+    <div class="modal fade" id="adminQrCodeModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">QR Code de Acesso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img src="assets/images/sample-qrcode.png" alt="QR Code" class="img-fluid mb-3">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" value="CONDO-PKG-78945" readonly>
+                        <button class="btn btn-outline-secondary" type="button" id="adminCopyCodeButton">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm">
+                        <i class="fas fa-share-alt"></i> Compartilhar
+                    </button>
+                    <button class="btn btn-outline-success btn-sm">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>
