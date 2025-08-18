@@ -300,42 +300,35 @@
                                         <tr>
                                             <th>Área</th>
                                             <th>Data</th>
-                                            <th>Horário</th>
+                                            <th class="d-none d-md-table-cell">Horário</th> <!-- Oculta em mobile -->
                                             <th>Status</th>
-                                            <th>Pagamento</th>
+                                            <th class="d-none d-md-table-cell">Pagamento</th> <!-- Oculta em mobile -->
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Churrasqueira</td>
-                                            <td>17/06/2023</td>
-                                            <td>15:00 - 18:00</td>
-                                            <td><span class="badge bg-success">Confirmada</span></td>
-                                            <td><span class="badge bg-success">Pago</span></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-danger">
-                                                    <i class="fas fa-times"></i> Cancelar
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-qrcode"></i> QR Code
-                                                </button>
+                                                <span class="d-md-none">17/06/2023<br></span>
+                                                <!-- Quebra de linha em mobile -->
+                                                <span>15:00 - 18:00</span>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Salão de Festas</td>
-                                            <td>25/06/2023</td>
-                                            <td>19:00 - 23:00</td>
-                                            <td><span class="badge bg-warning">Pendente</span></td>
-                                            <td><span class="badge bg-warning">Aguardando</span></td>
+                                            <td class="d-none d-md-table-cell">15:00 - 18:00</td>
+                                            <td><span class="badge bg-success">Confirmada</span></td>
+                                            <td class="d-none d-md-table-cell"><span
+                                                    class="badge bg-success">Pago</span></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#paymentModal">
-                                                    <i class="fas fa-money-bill-wave"></i> Pagar
-                                                </button>
-                                                <button class="btn btn-sm btn-outline-danger">
-                                                    <i class="fas fa-times"></i> Cancelar
-                                                </button>
+                                                <div class="reservation-actions">
+                                                    <button class="btn btn-sm btn-outline-danger">
+                                                        <i class="fas fa-times"></i> <span
+                                                            class="d-none d-sm-inline">Cancelar</span>
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-qrcode"></i> <span
+                                                            class="d-none d-sm-inline">QR Code</span>
+                                                    </button>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -435,7 +428,7 @@
                             </div>
                         </div>
 
-                         <div class="col-md-6">
+                        <div class="col-md-6">
                             <div class="card voting-card">
                                 <div class="card-header bg-primary text-white">
                                     <h5>Novo Horário de Silêncio</h5>
@@ -654,7 +647,7 @@
         </div>
     </div>
 
-        <!-- Modals -->
+    <!-- Modals -->
     <!-- New Package Modal -->
     <div class="modal fade" id="newPackageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -731,7 +724,8 @@
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agreeTerms" required>
-                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de utilização</label>
+                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de
+                                utilização</label>
                         </div>
                     </form>
                 </div>
@@ -763,7 +757,8 @@
                         <h6>Métodos de Pagamento</h6>
                         <div class="list-group">
                             <label class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix" checked>
+                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix"
+                                    checked>
                                 PIX
                                 <span class="badge bg-primary">Recomendado</span>
                             </label>
@@ -780,16 +775,20 @@
 
                     <div class="pix-payment mt-4">
                         <div class="text-center">
-                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3" style="max-width: 200px;">
+                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3"
+                                style="max-width: 200px;">
                             <p>Ou copie o código abaixo:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2" readonly>
+                                <input type="text" class="form-control"
+                                    value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2"
+                                    readonly>
                                 <button class="btn btn-outline-secondary" type="button" id="copyPixButton">
                                     <i class="fas fa-copy"></i>
                                 </button>
                             </div>
                             <div class="alert alert-info">
-                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a confirmação do pagamento.
+                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a
+                                confirmação do pagamento.
                             </div>
                         </div>
                     </div>
@@ -810,7 +809,7 @@
                     <h5 class="modal-title">Nova Ocorrência</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                                <div class="modal-body">
+                <div class="modal-body">
                     <form id="newOccurrenceForm" method="POST" action="#">
                         <div class="mb-3">
                             <label for="occurrenceType" class="form-label">Tipo de Ocorrência</label>
@@ -863,7 +862,8 @@
                         <div class="mb-3">
                             <label class="form-label">Tipo</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="itemType" id="itemFound" value="found" checked>
+                                <input class="form-check-input" type="radio" name="itemType" id="itemFound"
+                                    value="found" checked>
                                 <label class="form-check-label" for="itemFound">
                                     Item Achado
                                 </label>
@@ -922,7 +922,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="visitorDocument" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="visitorDocument" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00">
+                            <input type="text" class="form-control" id="visitorDocument" required
+                                pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00">
                         </div>
                         <div class="mb-3">
                             <label for="visitorPhone" class="form-label">Telefone</label>
@@ -952,7 +953,8 @@
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="visitorAgreement" required>
-                            <label class="form-check-label" for="visitorAgreement">Declaro que as informações são verdadeiras</label>
+                            <label class="form-check-label" for="visitorAgreement">Declaro que as informações são
+                                verdadeiras</label>
                         </div>
                     </form>
                 </div>
@@ -995,4 +997,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="assets/js/resident.js"></script>
 </body>
+
 </html>

@@ -295,3 +295,25 @@ $(document).ready(function() {
 
 });
 });
+
+
+
+
+
+// Adiciona labels para células da tabela em mobile
+function adaptReservationsTableForMobile() {
+    if ($(window).width() < 768) {
+        $('table tr').each(function() {
+            $(this).find('td').each(function(i) {
+                const headerText = $('table thead th').eq(i).text();
+                $(this).attr('data-label', headerText);
+            });
+        });
+    }
+}
+
+// Executa na carga e no redimensionamento
+$(document).ready(function() {
+    adaptReservationsTableForMobile();
+    $(window).resize(adaptReservationsTableForMobile);
+});
