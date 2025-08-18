@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,11 +13,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <!-- FullCalendar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- Se precisar de plugins adicionais -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/resident.css">
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
 </head>
+
 <body class="resident-app">
     <!-- App Container -->
     <div class="app-container">
@@ -49,7 +57,7 @@
                 <div class="app-version">v1.0.0</div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="app-main">
             <!-- Top Bar -->
@@ -103,7 +111,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <!-- Content Area -->
             <div class="app-content">
                 <!-- Dashboard -->
@@ -112,7 +120,7 @@
                         <h2>Dashboard</h2>
                         <small>Bem-vindo de volta, João!</small>
                     </div>
-                    
+
                     <div class="row">
                         <!-- Quick Stats -->
                         <div class="col-md-3">
@@ -160,7 +168,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Recent Activities -->
                     <div class="card mt-4">
                         <div class="card-header">
@@ -201,7 +209,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Calendar -->
                     <div class="card mt-4">
                         <div class="card-header">
@@ -212,7 +220,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Encomendas -->
                 <section id="packages-section" class="content-section">
                     <div class="section-header">
@@ -221,7 +229,7 @@
                             <i class="fas fa-plus"></i> Nova Encomenda
                         </button>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -273,7 +281,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Reservas -->
                 <section id="reservations-section" class="content-section">
                     <div class="section-header">
@@ -282,13 +290,13 @@
                             <i class="fas fa-plus"></i> Nova Reserva
                         </button>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div id="reservation-calendar"></div>
                         </div>
                     </div>
-                    
+
                     <div class="card mt-4">
                         <div class="card-header">
                             <h5>Minhas Reservas</h5>
@@ -329,7 +337,8 @@
                                             <td><span class="badge bg-warning">Pendente</span></td>
                                             <td><span class="badge bg-warning">Aguardando</span></td>
                                             <td>
-                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#paymentModal">
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#paymentModal">
                                                     <i class="fas fa-money-bill-wave"></i> Pagar
                                                 </button>
                                                 <button class="btn btn-sm btn-outline-danger">
@@ -343,7 +352,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Ocorrências -->
                 <section id="occurrences-section" class="content-section">
                     <div class="section-header">
@@ -352,7 +361,7 @@
                             <i class="fas fa-plus"></i> Nova Ocorrência
                         </button>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -395,13 +404,13 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Votações -->
                 <section id="voting-section" class="content-section">
                     <div class="section-header">
                         <h2>Votações de Assembleia</h2>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card voting-card">
@@ -410,7 +419,8 @@
                                     <small>Encerra em 20/06/2023</small>
                                 </div>
                                 <div class="card-body">
-                                    <p>Proposta de reforma completa da área da piscina, incluindo novo piso antiderrapante e sistema de filtragem.</p>
+                                    <p>Proposta de reforma completa da área da piscina, incluindo novo piso
+                                        antiderrapante e sistema de filtragem.</p>
                                     <div class="voting-progress mb-3">
                                         <div class="progress">
                                             <div class="progress-bar bg-success" style="width: 65%">65%</div>
@@ -432,7 +442,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="card voting-card">
                                 <div class="card-header bg-primary text-white">
@@ -463,7 +473,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card mt-4">
                         <div class="card-header">
                             <h5>Votações Anteriores</h5>
@@ -509,7 +519,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Achados e Perdidos -->
                 <section id="lost-found-section" class="content-section">
                     <div class="section-header">
@@ -518,7 +528,7 @@
                             <i class="fas fa-plus"></i> Reportar Item
                         </button>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card lost-item-card">
@@ -538,7 +548,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="card lost-item-card">
                                 <img src="assets/images/lost-item2.jpg" class="card-img-top" alt="Item perdido">
@@ -557,7 +567,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="card lost-item-card">
                                 <img src="assets/images/lost-item3.jpg" class="card-img-top" alt="Item perdido">
@@ -578,7 +588,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Visitantes -->
                 <section id="visitors-section" class="content-section">
                     <div class="section-header">
@@ -587,7 +597,7 @@
                             <i class="fas fa-plus"></i> Novo Visitante
                         </button>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -651,7 +661,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Modals -->
     <!-- New Package Modal -->
     <div class="modal fade" id="newPackageModal" tabindex="-1" aria-hidden="true">
@@ -688,7 +698,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Reservation Modal -->
     <div class="modal fade" id="newReservationModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -729,7 +739,8 @@
                         </div>
                         <div class="mb-3 form-check">
                             <input type="checkbox" class="form-check-input" id="agreeTerms">
-                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de utilização</label>
+                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de
+                                utilização</label>
                         </div>
                     </form>
                 </div>
@@ -740,7 +751,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Payment Modal -->
     <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -756,12 +767,13 @@
                         <p><strong>Horário:</strong> 19:00 - 23:00</p>
                         <p><strong>Valor:</strong> R$ 150,00</p>
                     </div>
-                    
+
                     <div class="payment-methods mt-4">
                         <h6>Métodos de Pagamento</h6>
                         <div class="list-group">
                             <label class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix" checked>
+                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix"
+                                    checked>
                                 PIX
                                 <span class="badge bg-primary">Recomendado</span>
                             </label>
@@ -775,19 +787,23 @@
                             </label>
                         </div>
                     </div>
-                    
+
                     <div class="pix-payment mt-4">
                         <div class="text-center">
-                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3" style="max-width: 200px;">
+                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3"
+                                style="max-width: 200px;">
                             <p>Ou copie o código abaixo:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2" readonly>
+                                <input type="text" class="form-control"
+                                    value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2"
+                                    readonly>
                                 <button class="btn btn-outline-secondary" type="button" id="copyPixButton">
                                     <i class="fas fa-copy"></i>
                                 </button>
                             </div>
                             <div class="alert alert-info">
-                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a confirmação do pagamento.
+                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a
+                                confirmação do pagamento.
                             </div>
                         </div>
                     </div>
@@ -799,7 +815,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Occurrence Modal -->
     <div class="modal fade" id="newOccurrenceModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -846,7 +862,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Lost Item Modal -->
     <div class="modal fade" id="newLostItemModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -860,7 +876,8 @@
                         <div class="mb-3">
                             <label class="form-label">Tipo</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="itemType" id="itemFound" value="found" checked>
+                                <input class="form-check-input" type="radio" name="itemType" id="itemFound"
+                                    value="found" checked>
                                 <label class="form-check-label" for="itemFound">
                                     Item Achado
                                 </label>
@@ -901,7 +918,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Visitor Modal -->
     <div class="modal fade" id="newVisitorModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -955,7 +972,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- QR Code Modal -->
     <div class="modal fade" id="qrCodeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -977,7 +994,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -985,7 +1002,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="assets/js/resident.js"></script>
-    
+
     <script>
         // Inicialização do PWA
         if ('serviceWorker' in navigator) {
@@ -999,4 +1016,5 @@
         }
     </script>
 </body>
+
 </html>

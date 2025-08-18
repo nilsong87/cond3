@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,9 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.css">
     <!-- DataTables -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+    <!-- FullCalendar CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- Se precisar de plugins adicionais -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/admin.css">
 </head>
+
 <body class="admin-app">
     <!-- App Container -->
     <div class="app-container">
@@ -49,7 +57,7 @@
                 <div class="app-version">Admin v1.0.0</div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="app-main">
             <!-- Top Bar -->
@@ -121,7 +129,7 @@
                     </div>
                 </div>
             </header>
-            
+
             <!-- Content Area -->
             <div class="app-content">
                 <!-- Dashboard -->
@@ -130,7 +138,7 @@
                         <h2>Dashboard Administrativo</h2>
                         <small>Visão geral do condomínio</small>
                     </div>
-                    
+
                     <div class="row">
                         <!-- Quick Stats -->
                         <div class="col-md-3">
@@ -182,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Charts Row -->
                     <div class="row mt-4">
                         <div class="col-md-8">
@@ -206,7 +214,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Recent Activities -->
                     <div class="row mt-4">
                         <div class="col-md-6">
@@ -252,7 +260,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">
@@ -298,13 +306,14 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Encomendas -->
                 <section id="packages-section" class="content-section">
                     <div class="section-header">
                         <h2>Gestão de Encomendas</h2>
                         <div class="header-actions">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewPackageModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#adminNewPackageModal">
                                 <i class="fas fa-plus"></i> Nova Encomenda
                             </button>
                             <button class="btn btn-outline-secondary">
@@ -312,7 +321,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -411,13 +420,14 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Reservas -->
                 <section id="reservations-section" class="content-section">
                     <div class="section-header">
                         <h2>Gestão de Reservas</h2>
                         <div class="header-actions">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewReservationModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#adminNewReservationModal">
                                 <i class="fas fa-plus"></i> Nova Reserva
                             </button>
                             <button class="btn btn-outline-secondary">
@@ -425,13 +435,13 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div id="admin-reservation-calendar"></div>
                         </div>
                     </div>
-                    
+
                     <div class="card mt-4">
                         <div class="card-header">
                             <h5>Todas as Reservas</h5>
@@ -527,13 +537,14 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Ocorrências -->
                 <section id="occurrences-section" class="content-section">
                     <div class="section-header">
                         <h2>Gestão de Ocorrências</h2>
                         <div class="header-actions">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewOccurrenceModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#adminNewOccurrenceModal">
                                 <i class="fas fa-plus"></i> Nova Ocorrência
                             </button>
                             <button class="btn btn-outline-secondary">
@@ -541,7 +552,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -625,7 +636,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Votações -->
                 <section id="voting-section" class="content-section">
                     <div class="section-header">
@@ -636,7 +647,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card voting-card">
@@ -645,7 +656,8 @@
                                     <small>Encerra em 20/06/2023</small>
                                 </div>
                                 <div class="card-body">
-                                    <p>Proposta de reforma completa da área da piscina, incluindo novo piso antiderrapante e sistema de filtragem.</p>
+                                    <p>Proposta de reforma completa da área da piscina, incluindo novo piso
+                                        antiderrapante e sistema de filtragem.</p>
                                     <div class="voting-stats mb-3">
                                         <div class="row">
                                             <div class="col-6">
@@ -681,7 +693,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                             <div class="card voting-card">
                                 <div class="card-header bg-primary text-white">
@@ -726,7 +738,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="card mt-4">
                         <div class="card-header">
                             <h5>Votações Anteriores</h5>
@@ -783,18 +795,19 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Achados e Perdidos -->
                 <section id="lost-found-section" class="content-section">
                     <div class="section-header">
                         <h2>Gestão de Achados e Perdidos</h2>
                         <div class="header-actions">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewLostItemModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#adminNewLostItemModal">
                                 <i class="fas fa-plus"></i> Novo Item
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col-md-4">
                             <div class="card lost-item-card">
@@ -817,7 +830,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="card lost-item-card">
                                 <img src="assets/images/lost-item2.jpg" class="card-img-top" alt="Item perdido">
@@ -839,7 +852,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-4">
                             <div class="card lost-item-card">
                                 <img src="assets/images/lost-item3.jpg" class="card-img-top" alt="Item perdido">
@@ -860,13 +873,14 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Visitantes -->
                 <section id="visitors-section" class="content-section">
                     <div class="section-header">
                         <h2>Gestão de Visitantes</h2>
                         <div class="header-actions">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminNewVisitorModal">
+                            <button class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#adminNewVisitorModal">
                                 <i class="fas fa-plus"></i> Novo Visitante
                             </button>
                             <button class="btn btn-outline-secondary">
@@ -874,7 +888,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -945,7 +959,7 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Moradores -->
                 <section id="residents-section" class="content-section">
                     <div class="section-header">
@@ -959,7 +973,7 @@
                             </button>
                         </div>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -1041,13 +1055,13 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Relatórios -->
                 <section id="reports-section" class="content-section">
                     <div class="section-header">
                         <h2>Relatórios</h2>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -1063,11 +1077,13 @@
                                             <form class="mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="packageReportStart" class="form-label">Data Início</label>
+                                                        <label for="packageReportStart" class="form-label">Data
+                                                            Início</label>
                                                         <input type="date" class="form-control" id="packageReportStart">
                                                     </div>
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="packageReportEnd" class="form-label">Data Fim</label>
+                                                        <label for="packageReportEnd" class="form-label">Data
+                                                            Fim</label>
                                                         <input type="date" class="form-control" id="packageReportEnd">
                                                     </div>
                                                 </div>
@@ -1080,12 +1096,13 @@
                                                         <option value="delivered">Entregues</option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar
+                                                    Relatório</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="report-card">
                                         <div class="report-header">
@@ -1098,16 +1115,21 @@
                                             <form class="mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="reservationReportStart" class="form-label">Data Início</label>
-                                                        <input type="date" class="form-control" id="reservationReportStart">
+                                                        <label for="reservationReportStart" class="form-label">Data
+                                                            Início</label>
+                                                        <input type="date" class="form-control"
+                                                            id="reservationReportStart">
                                                     </div>
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="reservationReportEnd" class="form-label">Data Fim</label>
-                                                        <input type="date" class="form-control" id="reservationReportEnd">
+                                                        <label for="reservationReportEnd" class="form-label">Data
+                                                            Fim</label>
+                                                        <input type="date" class="form-control"
+                                                            id="reservationReportEnd">
                                                     </div>
                                                 </div>
                                                 <div class="mb-2">
-                                                    <label for="reservationReportArea" class="form-label">Área Comum</label>
+                                                    <label for="reservationReportArea" class="form-label">Área
+                                                        Comum</label>
                                                     <select class="form-select" id="reservationReportArea">
                                                         <option value="">Todas</option>
                                                         <option value="churrasqueira">Churrasqueira</option>
@@ -1116,13 +1138,14 @@
                                                         <option value="sala_jogos">Sala de Jogos</option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar
+                                                    Relatório</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="row mt-4">
                                 <div class="col-md-6">
                                     <div class="report-card">
@@ -1136,12 +1159,16 @@
                                             <form class="mb-3">
                                                 <div class="row">
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="occurrenceReportStart" class="form-label">Data Início</label>
-                                                        <input type="date" class="form-control" id="occurrenceReportStart">
+                                                        <label for="occurrenceReportStart" class="form-label">Data
+                                                            Início</label>
+                                                        <input type="date" class="form-control"
+                                                            id="occurrenceReportStart">
                                                     </div>
                                                     <div class="col-md-6 mb-2">
-                                                        <label for="occurrenceReportEnd" class="form-label">Data Fim</label>
-                                                        <input type="date" class="form-control" id="occurrenceReportEnd">
+                                                        <label for="occurrenceReportEnd" class="form-label">Data
+                                                            Fim</label>
+                                                        <input type="date" class="form-control"
+                                                            id="occurrenceReportEnd">
                                                     </div>
                                                 </div>
                                                 <div class="mb-2">
@@ -1154,12 +1181,13 @@
                                                         <option value="cleaning">Limpeza</option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar
+                                                    Relatório</button>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     <div class="report-card">
                                         <div class="report-header">
@@ -1190,7 +1218,8 @@
                                                     </div>
                                                     <div class="col-md-6 mb-2">
                                                         <label for="financialReportYear" class="form-label">Ano</label>
-                                                        <input type="number" class="form-control" id="financialReportYear" value="2023" min="2020" max="2030">
+                                                        <input type="number" class="form-control"
+                                                            id="financialReportYear" value="2023" min="2020" max="2030">
                                                     </div>
                                                 </div>
                                                 <div class="mb-2">
@@ -1202,7 +1231,8 @@
                                                         <option value="other">Outros</option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-primary w-100">Gerar Relatório</button>
+                                                <button type="submit" class="btn btn-primary w-100">Gerar
+                                                    Relatório</button>
                                             </form>
                                         </div>
                                     </div>
@@ -1211,48 +1241,55 @@
                         </div>
                     </div>
                 </section>
-                
+
                 <!-- Configurações -->
                 <section id="settings-section" class="content-section">
                     <div class="section-header">
                         <h2>Configurações do Sistema</h2>
                     </div>
-                    
+
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="settingsTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button">Geral</button>
+                                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab"
+                                        data-bs-target="#general" type="button">Geral</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="areas-tab" data-bs-toggle="tab" data-bs-target="#areas" type="button">Áreas Comuns</button>
+                                    <button class="nav-link" id="areas-tab" data-bs-toggle="tab" data-bs-target="#areas"
+                                        type="button">Áreas Comuns</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="notifications-tab" data-bs-toggle="tab" data-bs-target="#notifications" type="button">Notificações</button>
+                                    <button class="nav-link" id="notifications-tab" data-bs-toggle="tab"
+                                        data-bs-target="#notifications" type="button">Notificações</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users" type="button">Usuários Admin</button>
+                                    <button class="nav-link" id="users-tab" data-bs-toggle="tab" data-bs-target="#users"
+                                        type="button">Usuários Admin</button>
                                 </li>
                             </ul>
-                            
+
                             <div class="tab-content mt-3" id="settingsTabContent">
                                 <!-- Geral -->
                                 <div class="tab-pane fade show active" id="general" role="tabpanel">
                                     <form id="generalSettingsForm">
                                         <div class="mb-3">
                                             <label for="condominiumName" class="form-label">Nome do Condomínio</label>
-                                            <input type="text" class="form-control" id="condominiumName" value="Condomínio Premium">
+                                            <input type="text" class="form-control" id="condominiumName"
+                                                value="Condomínio Premium">
                                         </div>
                                         <div class="mb-3">
                                             <label for="condominiumAddress" class="form-label">Endereço</label>
-                                            <input type="text" class="form-control" id="condominiumAddress" value="Av. Paulista, 1000 - São Paulo/SP">
+                                            <input type="text" class="form-control" id="condominiumAddress"
+                                                value="Av. Paulista, 1000 - São Paulo/SP">
                                         </div>
                                         <div class="mb-3">
                                             <label for="condominiumLogo" class="form-label">Logo</label>
                                             <input type="file" class="form-control" id="condominiumLogo">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="condominiumRules" class="form-label">Regras do Condomínio</label>
+                                            <label for="condominiumRules" class="form-label">Regras do
+                                                Condomínio</label>
                                             <textarea class="form-control" id="condominiumRules" rows="5">1. Respeitar o horário de silêncio das 22h às 8h
 2. Manter as áreas comuns limpas e organizadas
 3. Não é permitido fumar nas áreas comuns
@@ -1261,15 +1298,16 @@
                                         <button type="submit" class="btn btn-primary">Salvar Configurações</button>
                                     </form>
                                 </div>
-                                
+
                                 <!-- Áreas Comuns -->
                                 <div class="tab-pane fade" id="areas" role="tabpanel">
                                     <div class="mb-3">
-                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAreaModal">
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#newAreaModal">
                                             <i class="fas fa-plus"></i> Nova Área
                                         </button>
                                     </div>
-                                    
+
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
@@ -1342,60 +1380,69 @@
                                         </table>
                                     </div>
                                 </div>
-                                
+
                                 <!-- Notificações -->
                                 <div class="tab-pane fade" id="notifications" role="tabpanel">
                                     <form id="notificationSettingsForm">
                                         <div class="mb-3">
                                             <label class="form-label">Tipos de Notificação</label>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifyNewPackage" checked>
+                                                <input class="form-check-input" type="checkbox" id="notifyNewPackage"
+                                                    checked>
                                                 <label class="form-check-label" for="notifyNewPackage">
                                                     Nova encomenda registrada
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifyReservation" checked>
+                                                <input class="form-check-input" type="checkbox" id="notifyReservation"
+                                                    checked>
                                                 <label class="form-check-label" for="notifyReservation">
                                                     Nova reserva solicitada
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifyOccurrence" checked>
+                                                <input class="form-check-input" type="checkbox" id="notifyOccurrence"
+                                                    checked>
                                                 <label class="form-check-label" for="notifyOccurrence">
                                                     Nova ocorrência registrada
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="notifyVisitor" checked>
+                                                <input class="form-check-input" type="checkbox" id="notifyVisitor"
+                                                    checked>
                                                 <label class="form-check-label" for="notifyVisitor">
                                                     Visitante agendado
                                                 </label>
                                             </div>
                                         </div>
-                                        
+
                                         <div class="mb-3">
-                                            <label for="notificationEmail" class="form-label">E-mail para Notificações</label>
-                                            <input type="email" class="form-control" id="notificationEmail" value="admin@condominiopremium.com">
+                                            <label for="notificationEmail" class="form-label">E-mail para
+                                                Notificações</label>
+                                            <input type="email" class="form-control" id="notificationEmail"
+                                                value="admin@condominiopremium.com">
                                         </div>
-                                        
+
                                         <div class="mb-3">
-                                            <label for="notificationWhatsApp" class="form-label">WhatsApp para Notificações</label>
-                                            <input type="tel" class="form-control" id="notificationWhatsApp" value="+5511987654321">
+                                            <label for="notificationWhatsApp" class="form-label">WhatsApp para
+                                                Notificações</label>
+                                            <input type="tel" class="form-control" id="notificationWhatsApp"
+                                                value="+5511987654321">
                                         </div>
-                                        
+
                                         <button type="submit" class="btn btn-primary">Salvar Configurações</button>
                                     </form>
                                 </div>
-                                
+
                                 <!-- Usuários Admin -->
                                 <div class="tab-pane fade" id="users" role="tabpanel">
                                     <div class="mb-3">
-                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newAdminUserModal">
+                                        <button class="btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#newAdminUserModal">
                                             <i class="fas fa-plus"></i> Novo Usuário
                                         </button>
                                     </div>
-                                    
+
                                     <div class="table-responsive">
                                         <table class="table table-hover">
                                             <thead>
@@ -1465,7 +1512,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Admin Modals -->
     <!-- New Package Modal -->
     <div class="modal fade" id="adminNewPackageModal" tabindex="-1" aria-hidden="true">
@@ -1496,7 +1543,8 @@
                             <input type="text" class="form-control" id="adminPackageSender" required>
                         </div>
                         <div class="mb-3">
-                            <label for="adminPackageTracking" class="form-label">Código de Rastreamento (opcional)</label>
+                            <label for="adminPackageTracking" class="form-label">Código de Rastreamento
+                                (opcional)</label>
                             <input type="text" class="form-control" id="adminPackageTracking">
                         </div>
                         <div class="mb-3">
@@ -1521,7 +1569,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Reservation Modal -->
     <div class="modal fade" id="adminNewReservationModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1595,7 +1643,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Occurrence Modal -->
     <div class="modal fade" id="adminNewOccurrenceModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1657,7 +1705,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="adminOccurrencePhotos" class="form-label">Fotos (opcional)</label>
-                            <input type="file" class="form-control" id="adminOccurrencePhotos" multiple accept="image/*">
+                            <input type="file" class="form-control" id="adminOccurrencePhotos" multiple
+                                accept="image/*">
                         </div>
                     </form>
                 </div>
@@ -1668,7 +1717,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Voting Modal -->
     <div class="modal fade" id="newVotingModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1723,7 +1772,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Lost Item Modal -->
     <div class="modal fade" id="adminNewLostItemModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1737,13 +1786,15 @@
                         <div class="mb-3">
                             <label class="form-label">Tipo</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemFound" value="found" checked>
+                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemFound"
+                                    value="found" checked>
                                 <label class="form-check-label" for="adminItemFound">
                                     Item Achado
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemLost" value="lost">
+                                <input class="form-check-input" type="radio" name="adminItemType" id="adminItemLost"
+                                    value="lost">
                                 <label class="form-check-label" for="adminItemLost">
                                     Item Perdido
                                 </label>
@@ -1786,7 +1837,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Visitor Modal -->
     <div class="modal fade" id="adminNewVisitorModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1859,7 +1910,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Resident Modal -->
     <div class="modal fade" id="newResidentModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1911,7 +1962,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Area Modal -->
     <div class="modal fade" id="newAreaModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -1961,7 +2012,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- New Admin User Modal -->
     <div class="modal fade" id="newAdminUserModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -2006,7 +2057,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- QR Code Modal -->
     <div class="modal fade" id="adminQrCodeModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -2033,7 +2084,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -2045,4 +2096,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="assets/js/admin.js"></script>
 </body>
+
 </html>
