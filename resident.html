@@ -9,16 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <!-- FullCalendar -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.css">
     <!-- FullCalendar CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css">
-    <!-- FullCalendar JS -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <!-- Se precisar de plugins adicionais -->
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/resident.css">
     <!-- PWA Manifest -->
@@ -62,7 +54,7 @@
         <div class="app-main">
             <!-- Top Bar -->
             <header class="app-header">
-                <button class="sidebar-toggle">
+                <button class="sidebar-toggle" aria-label="Alternar menu lateral">
                     <i class="fas fa-bars"></i>
                 </button>
                 <div class="header-title">Dashboard</div>
@@ -443,7 +435,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
+                         <div class="col-md-6">
                             <div class="card voting-card">
                                 <div class="card-header bg-primary text-white">
                                     <h5>Novo Horário de Silêncio</h5>
@@ -543,7 +535,7 @@
                                 </div>
                                 <div class="card-footer">
                                     <button class="btn btn-sm btn-outline-primary">
-                                        <i class="fas fa-claim"></i> É meu
+                                        <i class="fas fa-hand-paper"></i> É meu
                                     </button>
                                 </div>
                             </div>
@@ -662,7 +654,7 @@
         </div>
     </div>
 
-    <!-- Modals -->
+        <!-- Modals -->
     <!-- New Package Modal -->
     <div class="modal fade" id="newPackageModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
@@ -672,14 +664,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="newPackageForm">
+                    <form id="newPackageForm" method="POST" action="#">
                         <div class="mb-3">
                             <label for="packageDescription" class="form-label">Descrição</label>
-                            <input type="text" class="form-control" id="packageDescription" required>
+                            <input type="text" class="form-control" id="packageDescription" required minlength="3">
                         </div>
                         <div class="mb-3">
                             <label for="packageSender" class="form-label">Remetente</label>
-                            <input type="text" class="form-control" id="packageSender" required>
+                            <input type="text" class="form-control" id="packageSender" required minlength="3">
                         </div>
                         <div class="mb-3">
                             <label for="packageTracking" class="form-label">Código de Rastreamento (opcional)</label>
@@ -708,7 +700,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="newReservationForm">
+                    <form id="newReservationForm" method="POST" action="#">
                         <div class="mb-3">
                             <label for="reservationArea" class="form-label">Área Comum</label>
                             <select class="form-select" id="reservationArea" required>
@@ -738,9 +730,8 @@
                             <input type="number" class="form-control" id="reservationGuests" min="1" required>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="agreeTerms">
-                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de
-                                utilização</label>
+                            <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">Concordo com as regras de utilização</label>
                         </div>
                     </form>
                 </div>
@@ -772,8 +763,7 @@
                         <h6>Métodos de Pagamento</h6>
                         <div class="list-group">
                             <label class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix"
-                                    checked>
+                                <input class="form-check-input me-1" type="radio" name="paymentMethod" value="pix" checked>
                                 PIX
                                 <span class="badge bg-primary">Recomendado</span>
                             </label>
@@ -790,20 +780,16 @@
 
                     <div class="pix-payment mt-4">
                         <div class="text-center">
-                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3"
-                                style="max-width: 200px;">
+                            <img src="assets/images/qrcode-pix.png" alt="QR Code PIX" class="img-fluid mb-3" style="max-width: 200px;">
                             <p>Ou copie o código abaixo:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control"
-                                    value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2"
-                                    readonly>
+                                <input type="text" class="form-control" value="00020126580014BR.GOV.BCB.PIX0136123e4567-e12b-12d1-a456-4266554400005204000053039865404150.005802BR5913FULANO DE TAL6008BRASILIA62070503***6304A1B2" readonly>
                                 <button class="btn btn-outline-secondary" type="button" id="copyPixButton">
                                     <i class="fas fa-copy"></i>
                                 </button>
                             </div>
                             <div class="alert alert-info">
-                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a
-                                confirmação do pagamento.
+                                <i class="fas fa-info-circle"></i> A reserva será confirmada automaticamente após a confirmação do pagamento.
                             </div>
                         </div>
                     </div>
@@ -824,8 +810,8 @@
                     <h5 class="modal-title">Nova Ocorrência</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <form id="newOccurrenceForm">
+                                <div class="modal-body">
+                    <form id="newOccurrenceForm" method="POST" action="#">
                         <div class="mb-3">
                             <label for="occurrenceType" class="form-label">Tipo de Ocorrência</label>
                             <select class="form-select" id="occurrenceType" required>
@@ -852,12 +838,13 @@
                         <div class="mb-3">
                             <label for="occurrencePhotos" class="form-label">Fotos (opcional)</label>
                             <input type="file" class="form-control" id="occurrencePhotos" multiple accept="image/*">
+                            <small class="text-muted">Você pode adicionar até 3 fotos</small>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Registrar Ocorrência</button>
+                    <button type="submit" class="btn btn-primary" form="newOccurrenceForm">Registrar Ocorrência</button>
                 </div>
             </div>
         </div>
@@ -872,12 +859,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="newLostItemForm">
+                    <form id="newLostItemForm" method="POST" action="#">
                         <div class="mb-3">
                             <label class="form-label">Tipo</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="itemType" id="itemFound"
-                                    value="found" checked>
+                                <input class="form-check-input" type="radio" name="itemType" id="itemFound" value="found" checked>
                                 <label class="form-check-label" for="itemFound">
                                     Item Achado
                                 </label>
@@ -891,7 +877,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="itemName" class="form-label">Nome/Descrição do Item</label>
-                            <input type="text" class="form-control" id="itemName" required>
+                            <input type="text" class="form-control" id="itemName" required minlength="3">
                         </div>
                         <div class="mb-3">
                             <label for="itemLocation" class="form-label">Local</label>
@@ -908,12 +894,13 @@
                         <div class="mb-3">
                             <label for="itemPhotos" class="form-label">Fotos</label>
                             <input type="file" class="form-control" id="itemPhotos" accept="image/*" required>
+                            <small class="text-muted">Adicione pelo menos 1 foto do item</small>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Publicar Item</button>
+                    <button type="submit" class="btn btn-primary" form="newLostItemForm">Publicar Item</button>
                 </div>
             </div>
         </div>
@@ -928,14 +915,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="newVisitorForm">
+                    <form id="newVisitorForm" method="POST" action="#">
                         <div class="mb-3">
                             <label for="visitorName" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="visitorName" required>
+                            <input type="text" class="form-control" id="visitorName" required minlength="3">
                         </div>
                         <div class="mb-3">
                             <label for="visitorDocument" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="visitorDocument" required>
+                            <input type="text" class="form-control" id="visitorDocument" required pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00">
                         </div>
                         <div class="mb-3">
                             <label for="visitorPhone" class="form-label">Telefone</label>
@@ -963,11 +950,15 @@
                             <label for="visitorPlate" class="form-label">Placa (opcional)</label>
                             <input type="text" class="form-control" id="visitorPlate">
                         </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="visitorAgreement" required>
+                            <label class="form-check-label" for="visitorAgreement">Declaro que as informações são verdadeiras</label>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Cadastrar Visitante</button>
+                    <button type="submit" class="btn btn-primary" form="newVisitorForm">Cadastrar Visitante</button>
                 </div>
             </div>
         </div>
@@ -982,12 +973,12 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
-                    <img src="assets/images/sample-qrcode.png" alt="QR Code" class="img-fluid mb-3">
+                    <div id="qrcode" class="mb-3"></div>
                     <p class="mb-2"><strong>Válido até:</strong> 25/06/2023 23:00</p>
-                    <button class="btn btn-outline-primary btn-sm">
+                    <button class="btn btn-outline-primary btn-sm" id="shareQR">
                         <i class="fas fa-share-alt"></i> Compartilhar
                     </button>
-                    <button class="btn btn-outline-success btn-sm">
+                    <button class="btn btn-outline-success btn-sm" id="whatsappQR">
                         <i class="fab fa-whatsapp"></i> WhatsApp
                     </button>
                 </div>
@@ -999,22 +990,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales-all.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="assets/js/resident.js"></script>
-
-    <script>
-        // Inicialização do PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('sw.js').then(registration => {
-                    console.log('ServiceWorker registration successful');
-                }).catch(err => {
-                    console.log('ServiceWorker registration failed: ', err);
-                });
-            });
-        }
-    </script>
 </body>
-
 </html>
