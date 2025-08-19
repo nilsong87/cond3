@@ -283,10 +283,10 @@ function saveAuthData(token, userData, rememberMe) {
 function redirectAfterLogin(role) {
   switch(role) {
     case 'admin':
-      window.location.href = 'admin/dashboard.html';
+      window.location.href = 'admin/admin.html';
       break;
     case 'resident':
-      window.location.href = 'resident/dashboard.html';
+      window.location.href = 'resident/resident.html';
       break;
     case 'porter':
       window.location.href = 'porter/dashboard.html';
