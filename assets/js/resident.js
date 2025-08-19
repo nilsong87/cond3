@@ -12,6 +12,9 @@ $(document).ready(function() {
     const $body = $('body');
     const $window = $(window);
 
+    // Objeto para armazenar as instâncias dos calendários
+    const calendars = {};
+
     // ==============================================
     // FUNÇÕES AUXILIARES
     // ==============================================
@@ -35,23 +38,6 @@ $(document).ready(function() {
     }
 
     /**
-     * Alterna a visibilidade da senha
-     * @param {jQuery} $button - Botão de toggle
-     */
-    function togglePasswordVisibility($button) {
-        const $input = $button.siblings('input');
-        const $icon = $button.find('i');
-        
-        if ($input.attr('type') === 'password') {
-            $input.attr('type', 'text');
-            $icon.removeClass('fa-eye').addClass('fa-eye-slash');
-        } else {
-            $input.attr('type', 'password');
-            $icon.removeClass('fa-eye-slash').addClass('fa-eye');
-        }
-    }
-
-    /**
      * Muda a seção de conteúdo exibida
      * @param {jQuery} $link - Link do menu clicado
      */
@@ -61,10 +47,17 @@ $(document).ready(function() {
         $('.sidebar-menu li').removeClass('active');
         $link.parent().addClass('active');
         
+        // Oculta todas as seções
         $('.content-section').removeClass('active');
-        $(`#${target}-section`).addClass('active');
+        
+        // Mostra a seção alvo
+        const $targetSection = $(`#${target}-section`);
+        $targetSection.addClass('active');
         
         $('.header-title').text($link.text().trim());
+        
+        // Redesenha os calendários visíveis
+        redrawVisibleCalendars();
         
         // Fecha sidebar em dispositivos móveis
         if ($window.width() < 992) {
@@ -73,16 +66,38 @@ $(document).ready(function() {
     }
 
     /**
+     * Redesenha todos os calendários visíveis
+     */
+    function redrawVisibleCalendars() {
+        Object.keys(calendars).forEach(calendarId => {
+            const calendarEl = document.getElementById(calendarId);
+            if (calendarEl && $(calendarEl).is(':visible') && calendars[calendarId]) {
+                setTimeout(() => {
+                    calendars[calendarId].render();
+                    calendars[calendarId].updateSize();
+                }, 50);
+            }
+        });
+    }
+
+    /**
      * Inicializa um calendário FullCalendar
      * @param {string} elementId - ID do elemento do calendário
      * @param {Array} events - Array de eventos
-     * @returns {Calendar} Instância do calendário
      */
     function initCalendar(elementId, events) {
         const calendarEl = document.getElementById(elementId);
-        if (!calendarEl) return null;
+        if (!calendarEl) {
+            console.error(`Elemento #${elementId} não encontrado`);
+            return;
+        }
 
         try {
+            // Destrói qualquer instância existente
+            if (calendars[elementId]) {
+                calendars[elementId].destroy();
+            }
+
             const calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 headerToolbar: {
@@ -100,13 +115,20 @@ $(document).ready(function() {
                 },
                 eventClick: function(info) {
                     showEventModal(info.event);
-                }
+                },
+                height: 'auto',
+                contentHeight: 'auto',
+                aspectRatio: 1.5
             });
             
             calendar.render();
+            
+            // Armazena a referência do calendário
+            calendars[elementId] = calendar;
+            
             return calendar;
         } catch (error) {
-            console.error('Erro ao inicializar o calendário:', error);
+            console.error(`Erro ao inicializar o calendário #${elementId}:`, error);
             return null;
         }
     }
@@ -128,26 +150,6 @@ $(document).ready(function() {
         $('#eventModal').modal('show');
     }
 
-    /**
-     * Simula o envio de um formulário
-     * @param {jQuery} $form - Formulário jQuery
-     */
-    function simulateFormSubmission($form) {
-        const formName = $form.attr('id').replace('Form', '').replace(/([A-Z])/g, ' $1').trim();
-        const $submitBtn = $form.find('[type="submit"]');
-        const originalText = $submitBtn.html();
-        
-        $submitBtn.prop('disabled', true).html('<i class="fas fa-spinner fa-spin"></i> Processando...');
-        
-        setTimeout(() => {
-            // Aqui seria o sucesso do AJAX
-            alert(`${formName} enviado com sucesso!`);
-            $form.closest('.modal').modal('hide');
-            $form.trigger('reset');
-            $submitBtn.prop('disabled', false).html(originalText);
-        }, 1500);
-    }
-
     // ==============================================
     // INICIALIZAÇÃO DOS COMPONENTES
     // ==============================================
@@ -160,11 +162,6 @@ $(document).ready(function() {
     
     // Fechar sidebar ao clicar no overlay
     $sidebarOverlay.on('click', closeSidebar);
-    
-    // Alternar visibilidade da senha
-    $('.toggle-password').on('click', function() {
-        togglePasswordVisibility($(this));
-    });
     
     // Alternar entre seções de conteúdo
     $('.sidebar-menu a').on('click', function(e) {
@@ -209,111 +206,33 @@ $(document).ready(function() {
         }
     ];
 
-    initCalendar('resident-calendar', residentEvents);
-    initCalendar('reservation-calendar', reservationEvents);
+    // Inicializa os calendários
+    initCalendar('dashboard-calendar', residentEvents);
+    initCalendar('reservations-main-calendar', reservationEvents);
 
-    // Botões QR Code
-    $(document).on('click', '.btn-outline-primary', function() {
-        if ($(this).find('i').hasClass('fa-qrcode')) {
-            $('#qrCodeModal').modal('show');
-        }
-    });
-    
-    // Submissão de formulários
-    $('#newPackageForm, #newReservationForm, #newOccurrenceForm, #newLostItemForm, #newVisitorForm').on('submit', function(e) {
-        e.preventDefault();
-        simulateFormSubmission($(this));
-    });
-    
-    // Copiar código PIX
-    $('#copyPixButton').on('click', function() {
-        const pixCode = $(this).siblings('input').val();
-        navigator.clipboard.writeText(pixCode).then(function() {
-            const $button = $('#copyPixButton');
-            const originalText = $button.html();
-            
-            $button.html('<i class="fas fa-check"></i> Copiado!');
-            setTimeout(() => {
-                $button.html(originalText);
-            }, 2000);
-        }).catch(err => {
-            console.error('Falha ao copiar texto: ', err);
-            alert('Não foi possível copiar o código PIX');
-        });
-    });
-    
-    // Fechar menu ao redimensionar para telas maiores
+    // Redesenha os calendários quando a janela é redimensionada
     $window.on('resize', function() {
+        redrawVisibleCalendars();
+        
+        // Fecha sidebar em dispositivos maiores
         if ($window.width() >= 992) {
             closeSidebar();
         }
     });
 
-    $(document).ready(function() {
-    // Elementos do DOM
-    const $sidebarToggle = $('.sidebar-toggle');
-    const $appSidebar = $('.app-sidebar');
-    const $sidebarOverlay = $('<div class="sidebar-overlay"></div>').appendTo('body');
-    const $body = $('body');
-
-    // Função para abrir/fechar o menu
-    function toggleSidebar() {
-        $appSidebar.toggleClass('active');
-        $sidebarOverlay.toggleClass('active');
-        $body.toggleClass('no-scroll');
-    }
-
-    // Função para fechar o menu
-    function closeSidebar() {
-        $appSidebar.removeClass('active');
-        $sidebarOverlay.removeClass('active');
-        $body.removeClass('no-scroll');
-    }
-
-    // Evento de clique no botão hamburguer
-    $sidebarToggle.on('click', function(e) {
-        e.stopPropagation();
-        toggleSidebar();
-    });
-
-    // Fechar ao clicar no overlay
-    $sidebarOverlay.on('click', closeSidebar);
-
-    // Fechar ao clicar em um link do menu (para mobile)
-    $('.sidebar-menu a').on('click', function() {
-        if ($(window).width() < 992) {
-            closeSidebar();
-        }
-    });
-
-    // Fechar ao redimensionar para telas maiores
-    $(window).on('resize', function() {
-        if ($(window).width() >= 992) {
-            closeSidebar();
-        }
-    });
-
-});
-});
-
-
-
-
-
-// Adiciona labels para células da tabela em mobile
-function adaptReservationsTableForMobile() {
-    if ($(window).width() < 768) {
-        $('table tr').each(function() {
-            $(this).find('td').each(function(i) {
-                const headerText = $('table thead th').eq(i).text();
-                $(this).attr('data-label', headerText);
+    // Adiciona labels para células da tabela em mobile
+    function adaptReservationsTableForMobile() {
+        if ($(window).width() < 768) {
+            $('table tr').each(function() {
+                $(this).find('td').each(function(i) {
+                    const headerText = $('table thead th').eq(i).text();
+                    $(this).attr('data-label', headerText);
+                });
             });
-        });
+        }
     }
-}
 
-// Executa na carga e no redimensionamento
-$(document).ready(function() {
+    // Executa na carga e no redimensionamento
     adaptReservationsTableForMobile();
     $(window).resize(adaptReservationsTableForMobile);
 });

@@ -208,7 +208,7 @@
                             <h5>Calendário de Reservas</h5>
                         </div>
                         <div class="card-body">
-                            <div id="resident-calendar"></div>
+                            <div id="dashboard-calendar"></div> <!-- ID único -->
                         </div>
                     </div>
                 </section>
@@ -285,7 +285,7 @@
 
                     <div class="card">
                         <div class="card-body">
-                            <div id="reservation-calendar"></div>
+                            <div id="reservations-main-calendar"></div> <!-- ID único -->
                         </div>
                     </div>
 
@@ -300,35 +300,42 @@
                                         <tr>
                                             <th>Área</th>
                                             <th>Data</th>
-                                            <th class="d-none d-md-table-cell">Horário</th> <!-- Oculta em mobile -->
+                                            <th>Horário</th>
                                             <th>Status</th>
-                                            <th class="d-none d-md-table-cell">Pagamento</th> <!-- Oculta em mobile -->
+                                            <th>Pagamento</th>
                                             <th>Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>Churrasqueira</td>
-                                            <td>
-                                                <span class="d-md-none">17/06/2023<br></span>
-                                                <!-- Quebra de linha em mobile -->
-                                                <span>15:00 - 18:00</span>
-                                            </td>
-                                            <td class="d-none d-md-table-cell">15:00 - 18:00</td>
+                                            <td>17/06/2023</td>
+                                            <td>15:00 - 18:00</td>
                                             <td><span class="badge bg-success">Confirmada</span></td>
-                                            <td class="d-none d-md-table-cell"><span
-                                                    class="badge bg-success">Pago</span></td>
+                                            <td><span class="badge bg-success">Pago</span></td>
                                             <td>
-                                                <div class="reservation-actions">
-                                                    <button class="btn btn-sm btn-outline-danger">
-                                                        <i class="fas fa-times"></i> <span
-                                                            class="d-none d-sm-inline">Cancelar</span>
-                                                    </button>
-                                                    <button class="btn btn-sm btn-outline-primary">
-                                                        <i class="fas fa-qrcode"></i> <span
-                                                            class="d-none d-sm-inline">QR Code</span>
-                                                    </button>
-                                                </div>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i> Cancelar
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-qrcode"></i> QR Code
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Salão de Festas</td>
+                                            <td>25/06/2023</td>
+                                            <td>19:00 - 23:00</td>
+                                            <td><span class="badge bg-warning">Pendente</span></td>
+                                            <td><span class="badge bg-warning">Aguardando</span></td>
+                                            <td>
+                                                <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#paymentModal">
+                                                    <i class="fas fa-money-bill-wave"></i> Pagar
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger">
+                                                    <i class="fas fa-times"></i> Cancelar
+                                                </button>
                                             </td>
                                         </tr>
                                     </tbody>
